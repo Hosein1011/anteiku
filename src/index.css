@@ -231,16 +231,45 @@ ul, ol {
 /* --- Responsive Base --- */
 @media (max-width: 768px) {
   :root {
-    --nav-height: 60px;
+    --nav-height: 64px;
+    --space-lg: 1.25rem;
+    --space-xl: 2.5rem;
+    --space-2xl: 3.5rem;
   }
 
   html {
     font-size: 15px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .container {
+    padding: 0 var(--space-md);
+  }
+
+  button, a {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 
 @media (max-width: 480px) {
+  :root {
+    --nav-height: 58px;
+    --space-lg: 1rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+  }
+
   html {
     font-size: 14px;
+  }
+
+  .container {
+    padding: 0 var(--space-sm);
   }
 }

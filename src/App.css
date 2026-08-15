@@ -151,6 +151,38 @@
   transform: translateX(0);
 }
 
+.navbar__mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navbar__mobile-title {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.navbar__mobile-close {
+  background: transparent;
+  border: none;
+  color: var(--color-cream);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: var(--space-xs);
+  transition: color var(--transition-fast);
+}
+
+.navbar__mobile-close:hover {
+  color: var(--color-gold);
+}
+
 .navbar__mobile-links {
   display: flex;
   flex-direction: column;

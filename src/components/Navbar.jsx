@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -10,6 +10,10 @@ const navLinks = [
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+
+  const closeMenu = useCallback(() => {
+    setIsMenuOpen(false)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,17 +27,32 @@ function Navbar() {
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden'
+      document.body.style.touchAction = 'none'
     } else {
       document.body.style.overflow = ''
+      document.body.style.touchAction = ''
     }
     return () => {
       document.body.style.overflow = ''
+      document.body.style.touchAction = ''
     }
   }, [isMenuOpen])
 
+  // Close menu on Escape key for mobile accessibility
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        closeMenu()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [isMenuOpen, closeMenu])
+
   const handleNavClick = (e, href) => {
     e.preventDefault()
-    setIsMenuOpen(false)
+    closeMenu()
     const target = document.querySelector(href)
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' })
@@ -42,7 +61,9 @@ function Navbar() {
 
   return (
     <nav
-      className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}
+      className={`navbar ${isScrolled ? 'navbar--scrolled' : ''} ${
+        isMenuOpen ? 'navbar--menu-active' : ''
+      }`}
       role="navigation"
       aria-label="Main navigation"
     >
@@ -73,7 +94,7 @@ function Navbar() {
 
         <button
           className={`navbar__hamburger ${isMenuOpen ? 'navbar__hamburger--open' : ''}`}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          onClick={() => setIsMenuOpen((prev) => !prev)}
           aria-expanded={isMenuOpen}
           aria-controls="mobile-menu"
           aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -91,6 +112,18 @@ function Navbar() {
         role="menu"
         aria-hidden={!isMenuOpen}
       >
+        <div className="navbar__mobile-header">
+          <span className="navbar__mobile-title">Navigation</span>
+          <button
+            type="button"
+            className="navbar__mobile-close"
+            onClick={closeMenu}
+            aria-label="Close menu"
+          >
+            &times;
+          </button>
+        </div>
+
         <ul className="navbar__mobile-links">
           {navLinks.map((link) => (
             <li key={link.href} role="none">
@@ -111,7 +144,7 @@ function Navbar() {
       {isMenuOpen && (
         <div
           className="navbar__overlay"
-          onClick={() => setIsMenuOpen(false)}
+          onClick={closeMenu}
           aria-hidden="true"
         />
       )}
