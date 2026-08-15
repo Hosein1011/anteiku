@@ -542,9 +542,122 @@
 /* --- Footer --- */
 .footer {
   margin-top: auto;
-  padding: 2rem;
-  text-align: center;
+  padding: var(--space-2xl) 0 var(--space-lg);
   border-top: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+  text-align: center;
+}
+
+.footer__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer__brand {
+  margin-bottom: var(--space-lg);
+}
+
+.footer__logo {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: var(--space-xs);
+  transition: color var(--transition-fast);
+}
+
+.footer__logo:hover {
+  color: var(--color-cream);
+}
+
+.footer__tagline {
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-style: italic;
   color: var(--color-text-muted);
-  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.footer__nav {
+  margin-bottom: var(--space-xl);
+}
+
+.footer__links {
+  display: flex;
+  gap: var(--space-xl);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer__link {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  transition: color var(--transition-fast);
+}
+
+.footer__link:hover {
+  color: var(--color-gold);
+}
+
+.footer__divider {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-border-light),
+    transparent
+  );
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__divider-gem {
+  color: var(--color-gold-dim);
+  background-color: var(--color-bg);
+  padding: 0 var(--space-sm);
+  font-size: 0.625rem;
+}
+
+.footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.footer__copyright {
+  font-size: 0.8125rem;
+  color: var(--color-text-dim);
+  margin: 0;
+}
+
+.footer__fictional-note {
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+  font-style: italic;
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .footer__links {
+    gap: var(--space-md);
+  }
 }
