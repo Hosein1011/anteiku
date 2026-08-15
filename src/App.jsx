@@ -1,3 +1,5 @@
+import FeaturedMenu from './components/FeaturedMenu'
+import Menu from './components/Menu'
 import './App.css'
 
 function App() {
@@ -17,16 +19,10 @@ function App() {
       </section>
 
       {/* Featured Menu */}
-      <section id="featured" className="section" aria-label="Featured Menu">
-        <h2 className="section-title">Our Favorites</h2>
-        <p className="section-placeholder">Featured menu items coming soon.</p>
-      </section>
+      <FeaturedMenu />
 
       {/* Full Menu */}
-      <section id="menu" className="section" aria-label="Full Menu">
-        <h2 className="section-title">The Menu</h2>
-        <p className="section-placeholder">Full menu coming soon.</p>
-      </section>
+      <Menu />
 
       {/* About */}
       <section id="about" className="section" aria-label="About ANTIQUE">
