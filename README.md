@@ -26,8 +26,9 @@ A static frontend single-page application for **ANTIQUE**, an elegant, atmospher
 - [11. Conflict Resolution #2 (Theme Polish & Responsive Fix)](#11-conflict-resolution-2-theme-polish--responsive-fix)
 - [12. Pull Request Workflow & Main Branch Protection](#12-pull-request-workflow--main-branch-protection)
 - [13. Continuous Deployment (GitHub Actions & Pages)](#13-continuous-deployment-github-actions--pages)
-- [14. Live Demonstration](#14-live-demonstration)
-- [15. License & Academic Disclaimer](#15-license--academic-disclaimer)
+- [14. Project Management & Kanban Board](#14-project-management--kanban-board)
+- [15. Live Demonstration](#15-live-demonstration)
+- [16. License & Academic Disclaimer](#16-license--academic-disclaimer)
 
 ---
 
@@ -335,14 +336,54 @@ Deployment is managed entirely through [`.github/workflows/deploy.yml`](.github/
 
 ---
 
-## 14. Live Demonstration
+## 14. Project Management & Kanban Board
+
+Project tasks were tracked using a GitHub Kanban Board structure organized into 5 workflow states:
+
+```
+[ BACKLOG ] ➔ [ TODO ] ➔ [ IN PROGRESS ] ➔ [ CODE REVIEW ] ➔ [ DONE ]
+```
+
+### Task Distribution & Implementation Mapping
+
+| Task / Issue Title | Category | Branch | Associated Commits | Final Status |
+|---|---|---|---|---|
+| Initialize React/Vite project | Setup | `main` | `c2c50dc` | **DONE** |
+| Configure .gitignore & metadata | Setup | `develop` | `61d1f94` | **DONE** |
+| Create base application structure | Architecture | `develop` | `a33591b` | **DONE** |
+| Establish ANTIQUE design tokens | Styling | `develop` | `8cf8345` | **DONE** |
+| Implement responsive navigation bar | UI Component | `feature/ui-foundation` | `23f1ef0` | **DONE** |
+| Implement hero section with assets | UI Component | `feature/ui-foundation` | `dfd606d` | **DONE** |
+| Implement about section | UI Component | `feature/ui-foundation` | `7262164` | **DONE** |
+| Implement visit-us contact section | UI Component | `feature/ui-foundation` | `55f9d9a` | **DONE** |
+| Implement footer component | UI Component | `feature/ui-foundation` | `778308a` | **DONE** |
+| Assemble UI foundation into App | Integration | `feature/ui-foundation` | `77b5178` | **DONE** |
+| Create 25-item menu data model | Data | `feature/menu-system` | `a99c44f` | **DONE** |
+| Implement MenuItem card component | Component | `feature/menu-system` | `a7a7c07` | **DONE** |
+| Implement featured menu section | Component | `feature/menu-system` | `13734c3` | **DONE** |
+| Implement category filter tabs | Component | `feature/menu-system` | `444369d` | **DONE** |
+| Implement menu search bar | Component | `feature/menu-system` | `21c59fa` | **DONE** |
+| Implement interactive Menu system | Component | `feature/menu-system` | `c1f0916` | **DONE** |
+| Assemble menu system into App | Integration | `feature/menu-system` | `6339681` | **DONE** |
+| Resolve Conflict #1 (App integration) | Git / Merge | `develop` | `9fe96e2` | **DONE** |
+| Fix mobile navbar overflow | Bugfix | `develop` | `84036a4` | **DONE** |
+| Refine hover animations & effects | Styling | `feature/theme-polish` | `e041c9a` | **DONE** |
+| Enhance navbar visual transitions | Styling | `feature/theme-polish` | `b21fa26` | **DONE** |
+| Resolve Conflict #2 (Theme polish) | Git / Merge | `develop` | `9ba158e` | **DONE** |
+| Configure GitHub Actions CI/CD | DevOps | `feature/deployment` | `98a96b0` | **DONE** |
+| Configure Vite base path for Pages | DevOps | `feature/deployment` | `4087f57` | **DONE** |
+| Write comprehensive README | Documentation | `develop` | `eb386c3` | **DONE** |
+
+---
+
+## 15. Live Demonstration
 
 - **GitHub Repository**: [https://github.com/Hosein1011/anteiku](https://github.com/Hosein1011/anteiku)
 - **Live GitHub Pages URL**: [https://Hosein1011.github.io/anteiku/](https://Hosein1011.github.io/anteiku/)
 
 ---
 
-## 15. License & Academic Disclaimer
+## 16. License & Academic Disclaimer
 
 This project is created strictly for educational purposes as part of a university Software Engineering Lab course.
 - **Original Content**: All copywriting, fictional menu items, design tokens, and components are original work.
