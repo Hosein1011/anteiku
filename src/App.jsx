@@ -1,121 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
+    <div className="app">
+      {/* Navigation */}
+      <header id="home">
+        <nav className="navbar">
+          <span className="navbar-brand">ANTIQUE</span>
+        </nav>
+      </header>
+
+      {/* Hero Section */}
+      <section className="hero-section" aria-label="Welcome">
+        <h1>ANTIQUE</h1>
+        <p className="tagline">Coffee. Memories. Quiet Moments.</p>
       </section>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
+      {/* Featured Menu */}
+      <section id="featured" className="section" aria-label="Featured Menu">
+        <h2 className="section-title">Our Favorites</h2>
+        <p className="section-placeholder">Featured menu items coming soon.</p>
       </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      {/* Full Menu */}
+      <section id="menu" className="section" aria-label="Full Menu">
+        <h2 className="section-title">The Menu</h2>
+        <p className="section-placeholder">Full menu coming soon.</p>
+      </section>
+
+      {/* About */}
+      <section id="about" className="section" aria-label="About ANTIQUE">
+        <h2 className="section-title">Our Story</h2>
+        <p className="section-placeholder">About section coming soon.</p>
+      </section>
+
+      {/* Visit Us */}
+      <section id="visit" className="section" aria-label="Visit Us">
+        <h2 className="section-title">Visit Us</h2>
+        <p className="section-placeholder">Contact information coming soon.</p>
+      </section>
+
+      {/* Footer */}
+      <footer className="footer">
+        <p>&copy; 2026 ANTIQUE. All rights reserved.</p>
+      </footer>
+    </div>
   )
 }
 
