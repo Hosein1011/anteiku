@@ -10,10 +10,26 @@ const navLinks = [
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState('home')
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      setIsScrolled(window.scrollY > 40)
+
+      const sections = ['home', 'menu', 'about', 'visit']
+      const scrollPos = window.scrollY + 200
+
+      for (const section of sections) {
+        const el = document.getElementById(section)
+        if (el) {
+          const top = el.offsetTop
+          const height = el.offsetHeight
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSection(section)
+            break
+          }
+        }
+      }
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -42,33 +58,40 @@ function Navbar() {
 
   return (
     <nav
-      className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}
+      className={`navbar ${isScrolled ? 'navbar--scrolled' : ''} navbar--polished`}
       role="navigation"
       aria-label="Main navigation"
     >
       <div className="navbar__inner">
         <a
           href="#home"
-          className="navbar__brand"
+          className="navbar__brand navbar__brand--glow"
           onClick={(e) => handleNavClick(e, '#home')}
           aria-label="ANTIQUE - Return to top"
         >
-          ANTIQUE
+          <span className="navbar__brand-text">ANTIQUE</span>
+          <span className="navbar__brand-sub">喫茶</span>
         </a>
 
         <ul className="navbar__links" role="menubar">
-          {navLinks.map((link) => (
-            <li key={link.href} role="none">
-              <a
-                href={link.href}
-                className="navbar__link"
-                role="menuitem"
-                onClick={(e) => handleNavClick(e, link.href)}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+          {navLinks.map((link) => {
+            const sectionId = link.href.replace('#', '')
+            const isActive = activeSection === sectionId
+
+            return (
+              <li key={link.href} role="none">
+                <a
+                  href={link.href}
+                  className={`navbar__link ${isActive ? 'navbar__link--active' : ''}`}
+                  role="menuitem"
+                  onClick={(e) => handleNavClick(e, link.href)}
+                >
+                  {link.label}
+                  {isActive && <span className="navbar__link-dot" aria-hidden="true" />}
+                </a>
+              </li>
+            )
+          })}
         </ul>
 
         <button
