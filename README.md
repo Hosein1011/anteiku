@@ -1,548 +1,546 @@
-**# گزارش آزمایشگاه مهندسی نرم‌افزار — ANTIQUE**
+# گزارش آزمایشگاه مهندسی نرم‌افزار — ANTIQUE
 
-\> **\*\*موضوع آزمایش:\*\*** فرانت‌اند ایستا با قابلیت استقرار خودکار (Static Frontend with Automated Deployment)  
-\> **\*\*نام پروژه:\*\*** ANTIQUE  
-\> **\*\*مشخصات اعضای تیم:\*\*** حسین کریمی (۴۰۲۱۰۶۳۸۳) ، آرتین برقی (۴۰۱۱۰۵۷۰۷)
+> **موضوع آزمایش:** فرانت‌اند ایستا با قابلیت استقرار خودکار (Static Frontend with Automated Deployment)
+> **نام پروژه:** ANTIQUE
+> **مشخصات اعضای تیم:** حسین کریمی (۴۰۲۱۰۶۳۸۳) ، آرتین برقی (۴۰۱۱۰۵۷۰۷)
 
-\---
+---
 
-**## فهرست مطالب**
+## فهرست مطالب
 
-1\. [معرفی پروژه]\(#۱-معرفی-پروژه)
-2\. [مشخصات فنی پروژه]\(#۳-مشخصات-فنی-پروژه)
-3\. [ساختار مخزن (Repository Structure)]\(#۵-ساختار-مخزن-repository-structure)
-4\. [فرآیند و دستورات Git]\(#۶-فرآیند-و-دستورات-git)
-5\. [استراتژی شاخه‌بندی (Branching Strategy)]\(#۷-استراتژی-شاخه‌بندی-branching-strategy)
-6\. [تاریخچه Commitها (Commit History)]\(#۸-تاریخچه-commitها-commit-history)
-7\. [مدیریت و حل تعارض‌ها (Conflict Resolution)]\(#۹-مدیریت-و-حل-تعارض‌ها-conflict-resolution)
-8\. [مدیریت تغییرات با Pull Request]\(#۱۰-مدیریت-تغییرات-با-pull-request)
-9\. [محافظت از شاخه اصلی (Branch Protection)]\(#۱۱-محافظت-از-شاخه-اصلی-branch-protection)
-10\. [استقرار پیوسته با GitHub Actions]\(#۱۲-استقرار-پیوسته-با-github-actions)
-11\. [ساختار کلی فرآیند توسعه]\(#۱۵-ساختار-کلی-فرآیند-توسعه)
-12\. [پاسخ جامع به پرسش‌های مفهومی]\(#۱۶-پاسخ-جامع-به-پرسش‌های-مفهومی)
-13\. [لینک‌های مهم پروژه]\(#۱۸-لینک‌های-مهم-پروژه)
-14\. [جمع‌بندی و چک‌لیست نهایی]\(#۱۹-جمع‌بندی-و-چک‌لیست-نهایی)
+1. [معرفی پروژه](#1-معرفی-پروژه)
+2. [مشخصات فنی پروژه](#2-مشخصات-فنی-پروژه)
+3. [ساختار مخزن (Repository Structure)](#3-ساختار-مخزن-repository-structure)
+4. [فرآیند و دستورات Git](#4-فرآیند-و-دستورات-git)
+5. [استراتژی شاخه‌بندی (Branching Strategy)](#5-استراتژی-شاخه‌بندی-branching-strategy)
+6. [تاریخچه Commitها (Commit History)](#6-تاریخچه-commitها-commit-history)
+7. [مدیریت و حل تعارض‌ها (Conflict Resolution)](#7-مدیریت-و-حل-تعارض‌ها-conflict-resolution)
+8. [مدیریت تغییرات با Pull Request](#8-مدیریت-تغییرات-با-pull-request)
+9. [محافظت از شاخه اصلی (Branch Protection)](#9-محافظت-از-شاخه-اصلی-branch-protection)
+10. [استقرار پیوسته با GitHub Actions](#10-استقرار-پیوسته-با-github-actions)
+11. [ساختار کلی فرآیند توسعه](#11-ساختار-کلی-فرآیند-توسعه)
+12. [پاسخ جامع به پرسش‌های مفهومی](#12-پاسخ-جامع-به-پرسش‌های-مفهومی)
+13. [لینک‌های مهم پروژه](#13-لینک‌های-مهم-پروژه)
+14. [نحوه استفاده از هوش مصنوعی](#14-نحوه-استفاده-از-هوش-مصنوعی)
+---
 
-\---
+# 1. معرفی پروژه
 
-**# 1. معرفی پروژه**
-
-پروژه **\*\*ANTIQUE\*\*** یک وب‌سایت فرانت‌اند ایستا (Static Single Page Application) با تم تاریک  برای یک کافی‌شاپ است. این پروژه با   React وVite طراحی شده است.
+پروژه **ANTIQUE** یک وب‌سایت فرانت‌اند ایستا (Static Single Page Application) با تم تاریک  برای یک کافی‌شاپ است. این پروژه با   React وVite طراحی شده است.
 
 هدف از این آزمایش، علاوه بر ساخت یک رابط کاربری مدیریت پروژه با Git، استراتژی شاخه‌بندی اصولی، کامیت‌های تک‌منظوره و معنادار (Atomic Commits)، شبیه‌سازی و حل تعارض‌های واقعی هنگام ادغام شاخه‌ها (Conflict Resolution)، ایجاد و بررسی Pull Request، اعمال قوانین محافظت از شاخه اصلی (Branch Protection)، راه‌اندازی پایپ‌لاین Continuous Deployment با GitHub Actions و استقرار خودکار روی سرویس GitHub Pages است.
 
-**### ویژگی‌های کلیدی رابط کاربری:**
-\- **\*\*معماری Single Page:\*\*** ساختار یکپارچه و ناوبری روان با اسکرول نرم بین بخش‌ها
-\- **\*\*طراحی کاملاً واکنش‌گرا (Responsive):\*\*** سازگاری کامل با دستگاه‌های موبایل، تبلت و دسکتاپ به همراه منوی همبرگری اختصاصی موبایل
-\- **\*\*سیستم منوی پویا (Dynamic Menu System):\*\*** رندرینگ پویای بیش از ۲۵ قلم محصول با استفاده از \`map()\` در دسته‌بندی‌های مختلف 
-\- **\*\*فیلتر هم‌زمان دسته‌بندی و جستجوی زنده (Live Search & Category Filtering):\*\*** امکان جستجوی لحظه‌ای بر اساس عنوان و توضیحات آیتم‌ها در ترکیب با فیلتر دسته‌بندی
-\- **\*\*طراحی بصری چشم‌نواز (Atmospheric & Dark Aesthetics):\*\*** استفاده از متغیرهای CSS (Design Tokens)، افکت‌های شیشه‌ای (Glassmorphism)، انیمیشن‌های میکرو و تعاملات نرم در هنگام Hover
+### ویژگی‌های کلیدی رابط کاربری:
+- **معماری Single Page:** ساختار یکپارچه و ناوبری روان با اسکرول نرم بین بخش‌ها
+- **طراحی کاملاً واکنش‌گرا (Responsive):** سازگاری کامل با دستگاه‌های موبایل، تبلت و دسکتاپ به همراه منوی همبرگری اختصاصی موبایل
+- **سیستم منوی پویا (Dynamic Menu System):** رندرینگ پویای بیش از ۲۵ قلم محصول با استفاده از `map()` در دسته‌بندی‌های مختلف**
+- **فیلتر هم‌زمان دسته‌بندی و جستجوی زنده (Live Search & Category Filtering):** امکان جستجوی لحظه‌ای بر اساس عنوان و توضیحات آیتم‌ها در ترکیب با فیلتر دسته‌بندی
+- **طراحی بصری چشم‌نواز (Atmospheric & Dark Aesthetics):** استفاده از متغیرهای CSS (Design Tokens)، افکت‌های شیشه‌ای (Glassmorphism)، انیمیشن‌های میکرو و تعاملات نرم در هنگام Hover
 
-\---
+---
 
-**# 2. مشخصات فنی پروژه**
+# 2. مشخصات فنی پروژه
 
-\- **\*\*نام پروژه:\*\*** ANTIQUE 
-\- **\*\*نوع پروژه:\*\*** وب‌اپلیکیشن تک‌صفحه‌ای ایستا (Static Single Page Application)
-\- **\*\*فناوری‌های اصلی:\*\*** React.js, Vite, JavaScript (ES6+), Vanilla CSS3, HTML5
-\- **\*\*ابزارهای مدیریت و استقرار:\*\*** Git, GitHub, GitHub Actions, GitHub Pages
-\- **\*\*آدرس مخزن در گیت‌هاب:\*\*** [https\://github.com/Hosein1011/anteiku]\(https\://github.com/Hosein1011/anteiku)
-\- **\*\*آدرس وب‌سایت فعال (GitHub Pages):\*\*** [https\://hosein1011.github.io/anteiku/]\(https\://hosein1011.github.io/anteiku/)
+- **نام پروژه:** ANTIQUE**
+- **نوع پروژه:** وب‌اپلیکیشن تک‌صفحه‌ای ایستا (Static Single Page Application)
+- **فناوری‌های اصلی:** React.js, Vite, JavaScript (ES6+), Vanilla CSS3, HTML5
+- **ابزارهای مدیریت و استقرار:** Git, GitHub, GitHub Actions, GitHub Pages
+- **آدرس مخزن در گیت‌هاب:** [https://github.com/Hosein1011/anteiku](https://github.com/Hosein1011/anteiku)
+- **آدرس وب‌سایت فعال (GitHub Pages):** [https://hosein1011.github.io/anteiku/](https://hosein1011.github.io/anteiku/)
 
-\---
+---
 
-**# 3. ساختار مخزن (Repository Structure)**
+# 3. ساختار مخزن (Repository Structure)
 
 ساختار فایل‌ها و دایرکتوری‌های پروژه به گونه‌ای طراحی شده که تفکیک وظایف (Separation of Concerns) و خوانایی کد در بالاترین سطح رعایت شود:
 
-\`\`\`text
+```text
 anteiku/
 ├── .github/
-│   └── workflows/
-│       └── deploy.yml           # پایپ‌لاین CI/CD استقرار خودکار روی GitHub Pages
+│   └── workflows/
+│       └── deploy.yml           # پایپ‌لاین CI/CD استقرار خودکار روی GitHub Pages
 ├── public/
-│   └── icons.svg                # آیکون‌های SVG برنامه
+│   └── icons.svg                # آیکون‌های SVG برنامه
 ├── src/
-│   ├── assets/                  # تصاویر پس‌زمینه و بنرهای گرافیکی باکیفیت
-│   │   ├── hero-bg.jpg
-│   │   └── about-bg.jpg
-│   ├── components/              # کامپوننت‌های مستقل و قابل استفاده مجدد
-│   │   ├── Navbar.jsx           # نوار ناوبری بالا همراه با منوی همبرگری موبایل
-│   │   ├── Hero.jsx             # بنر خوش‌آمدگویی و شعار کافه
-│   │   ├── FeaturedMenu.jsx     # نمایش محصولات منتخب و ویژه کافه
-│   │   ├── CategoryFilter.jsx   # دکمه‌های فیلتر بر اساس دسته‌بندی
-│   │   ├── MenuSearch.jsx       # فیلد ورودی جستجوی متنی آیتم‌ها
-│   │   ├── MenuItem.jsx         # کارت تکی نمایش محصول، برچسب‌ها و قیمت
-│   │   ├── Menu.jsx             # کامپوننت مادر تجمیع‌کننده جستجو، فیلتر و رندر منو
-│   │   ├── About.jsx            # معرفی تاریخچه، داستان و فرهنگ کافه
-│   │   ├── Contact.jsx          # فرم تماس، ساعات کاری و آدرس شعبه
-│   │   └── Footer.jsx           # فوتر، پیوندهای شبکه‌های اجتماعی و کپی‌رایت
-│   ├── data/
-│   │   └── menuData.js          # مدل داده جامع محصولات (۲۵+ قلم کالا)
-│   ├── App.css                  # استایل‌های بخش‌های مختلف و لایه‌بندی صفحه
-│   ├── App.jsx                  # کامپوننت اصلی تجمیع‌کننده تمام لایه‌ها
-│   ├── index.css                # متغیرهای CSS، ریست استایل‌ها و قوانین تایپوگرافی
-│   └── main.jsx                 # نقطه ورودی رندرینگ React در DOM
-├── .gitignore                   # فهرست فایل‌ها و پوشه‌های نادیده‌گرفته‌شده در گیت
-├── eslint.config.js             # تنظیمات ابزار لینتر کدهای جاوااسکریپت
-├── index.html                   # سند اصلی HTML با تنظیمات سئو و متاتگ‌ها
-├── package.json                 # وابستگی‌ها و اسکریپت‌های پروژه
-├── package-lock.json            # قفل نگارش دقیق پکیج‌ها
-├── vite.config.js               # پیکربندی بیلد Vite و base path مخزن
-└── README.md                    # گزارش جامع آزمایشگاه و مستندات پروژه
-\`\`\`
+│   ├── assets/                  # تصاویر پس‌زمینه و بنرهای گرافیکی باکیفیت
+│   │   ├── hero-bg.jpg
+│   │   └── about-bg.jpg
+│   ├── components/              # کامپوننت‌های مستقل و قابل استفاده مجدد
+│   │   ├── Navbar.jsx           # نوار ناوبری بالا همراه با منوی همبرگری موبایل
+│   │   ├── Hero.jsx             # بنر خوش‌آمدگویی و شعار کافه
+│   │   ├── FeaturedMenu.jsx     # نمایش محصولات منتخب و ویژه کافه
+│   │   ├── CategoryFilter.jsx   # دکمه‌های فیلتر بر اساس دسته‌بندی
+│   │   ├── MenuSearch.jsx       # فیلد ورودی جستجوی متنی آیتم‌ها
+│   │   ├── MenuItem.jsx         # کارت تکی نمایش محصول، برچسب‌ها و قیمت
+│   │   ├── Menu.jsx             # کامپوننت مادر تجمیع‌کننده جستجو، فیلتر و رندر منو
+│   │   ├── About.jsx            # معرفی تاریخچه، داستان و فرهنگ کافه
+│   │   ├── Contact.jsx          # فرم تماس، ساعات کاری و آدرس شعبه
+│   │   └── Footer.jsx           # فوتر، پیوندهای شبکه‌های اجتماعی و کپی‌رایت
+│   ├── data/
+│   │   └── menuData.js          # مدل داده جامع محصولات (۲۵+ قلم کالا)
+│   ├── App.css                  # استایل‌های بخش‌های مختلف و لایه‌بندی صفحه
+│   ├── App.jsx                  # کامپوننت اصلی تجمیع‌کننده تمام لایه‌ها
+│   ├── index.css                # متغیرهای CSS، ریست استایل‌ها و قوانین تایپوگرافی
+│   └── main.jsx                 # نقطه ورودی رندرینگ React در DOM
+├── .gitignore                   # فهرست فایل‌ها و پوشه‌های نادیده‌گرفته‌شده در گیت
+├── eslint.config.js             # تنظیمات ابزار لینتر کدهای جاوااسکریپت
+├── index.html                   # سند اصلی HTML با تنظیمات سئو و متاتگ‌ها
+├── package.json                 # وابستگی‌ها و اسکریپت‌های پروژه
+├── package-lock.json            # قفل نگارش دقیق پکیج‌ها
+├── vite.config.js               # پیکربندی بیلد Vite و base path مخزن
+└── README.md                    # گزارش جامع آزمایشگاه و مستندات پروژه
+```
 
-\---
+---
 
-**# 4. فرآیند و دستورات Git**
+# 4. فرآیند و دستورات Git
 
 توسعه پروژه بر اساس متدولوژی استاندارد Feature Branch Workflow در گیت مدیریت شده است.
 
-\`\`\`text
-  [Local Workspace]
-          │
-      (git add)
-          ▼
-   [Staging Area]
-          │
-     (git commit)
-          ▼
-  [Local Git Repository]
-   ├── main
-   ├── develop
-   └── feature/\*
-          │
-      (git push)
-          ▼
+```text
+  [Local Workspace]
+          │
+      (git add)
+          ▼
+   [Staging Area]
+          │
+     (git commit)
+          ▼
+  [Local Git Repository]
+   ├── main
+   ├── develop
+   └── feature/*
+          │
+      (git push)
+          ▼
 [GitHub Remote Repository]
-          │
-    (Pull Request)
-          ▼
+          │
+    (Pull Request)
+          ▼
 [Automated GitHub Actions]
-          │
-   (Deploy to Pages)
-          ▼
- [Live Web Application]
-\`\`\`
+          │
+   (Deploy to Pages)
+          ▼
+ [Live Web Application]
+```
 
-**### مهم‌ترین دستورات اجرا شده در طول توسعه:**
-\- **\*\*بررسی وضعیت و ردگیری تغییرات:\*\***
-  \`\`\`bash
-  git status
-  git log --oneline --graph --all
-  git diff
-  \`\`\`
-\- **\*\*استیج و ثبت تغییرات منطقی (Commits):\*\***
-  \`\`\`bash
-  git add \<file>
-  git commit -m "feat: implement responsive navigation bar"
-  \`\`\`
-\- **\*\*مدیریت شاخه‌ها و جابه‌جایی:\*\***
-  \`\`\`bash
-  git branch
-  git switch -c feature/menu-system
-  git switch develop
-  \`\`\`
-\- **\*\*همگام‌سازی با مخزن ریموت و حل تعارض:\*\***
-  \`\`\`bash
-  git merge feature/menu-system
-  # پس از برطرف کردن تعارض در فایل‌ها:
-  git add src/App.jsx src/App.css
-  git commit -m "merge: resolve conflict integrating menu-system"
-  git push origin develop
-  \`\`\`
+### مهم‌ترین دستورات اجرا شده در طول توسعه:
+- **بررسی وضعیت و ردگیری تغییرات:**
+  ```bash
+  git status
+  git log --oneline --graph --all
+  git diff
+  ```
+- **استیج و ثبت تغییرات منطقی (Commits):**
+  ```bash
+  git add <file>
+  git commit -m "feat: implement responsive navigation bar"
+  ```
+- **مدیریت شاخه‌ها و جابه‌جایی:**
+  ```bash
+  git branch
+  git switch -c feature/menu-system
+  git switch develop
+  ```
+- **همگام‌سازی با مخزن ریموت و حل تعارض:**
+  ```bash
+  git merge feature/menu-system
+  # پس از برطرف کردن تعارض در فایل‌ها:
+  git add src/App.jsx src/App.css
+  git commit -m "merge: resolve conflict integrating menu-system"
+  git push origin develop
+  ```
 
-\---
+---
 
-**# 5. استراتژی شاخه‌بندی (Branching Strategy)**
+# 5. استراتژی شاخه‌بندی (Branching Strategy)
 
 در این پروژه از یک استراتژی شاخه‌بندی ساختاریافته الهام‌گرفته از Git-Flow استفاده شده تا مرز مشخصی میان کدهای در حال توسعه، کدهای پایدار و نسخه استقراریافته نهایی وجود داشته باشد:
 
-\`\`\`text
+```text
 main ──────────────────────────────────────────●──────────● (v1.0 Production)
-                                              ▲          ▲
-                                              │ (PR #2)  │ (Release)
+                                              ▲          ▲
+                                              │ (PR #2)  │ (Release)
 develop ──────●────────●────────●────────●────┴──────────┘
-              │        ▲        │        ▲
-              │        │        │        │
-feature/ui-foundation ─┘        │        │
-                                │        │
-feature/menu-system ────────────┘        │
-                                         │
+              │        ▲        │        ▲
+              │        │        │        │
+feature/ui-foundation ─┘        │        │
+                                │        │
+feature/menu-system ────────────┘        │
+                                         │
 feature/theme-polish ────────────────────┘
-\`\`\`
+```
 
-**### نقش و مشخصات هر شاخه:**
+### نقش و مشخصات هر شاخه:
 
-\| نام شاخه (Branch) | نقش و کارکرد در پروژه | شاخه مبدأ | شاخه مقصد (Merge) |
-\|:---|:---|:---:|:---:|
-\| \`main\` | شاخه اصلی پروداکشن؛ نمایانگر نسخه نهایی و پایدار وب‌سایت که متصل به پایپ‌لاین استقرار خودکار است. | — | — |
-\| \`develop\` | شاخه یکپارچه‌سازی (Integration)؛ تمام قابلیت‌های جدید ابتدا در این شاخه با یکدیگر ترکیب و تست می‌شوند. | \`main\` | \`main\` |
-\| \`feature/ui-foundation\` | پیاده‌سازی اسکلت بصری، منوبار، بنر اصلی، درباره ما، فرم تماس و فوتر. | \`develop\` | \`develop\` |
-\| \`feature/menu-system\` | پیاده‌سازی ساختار داده محصولات، کامپوننت کارت‌ها، لیست منو، تب‌های فیلتر و نوار جستجو. | \`develop\` | \`develop\` (همراه با حل تعارض ۱) |
-\| \`feature/theme-polish\` | اعمال ریزانیمیشن‌ها، افکت‌های Hover، استایل‌های شیشه‌ای و بهبود جلوه‌های تعاملی. | \`develop\` | \`develop\` (همراه با حل تعارض ۲) |
-\| \`feature/deployment\` | پیکربندی اکشن‌های گیت‌هاب و تنظیم Base Path پروژه برای GitHub Pages. | \`develop\` | \`develop\` |
+| نام شاخه (Branch) | نقش و کارکرد در پروژه | شاخه مبدأ | شاخه مقصد (Merge) |
+|:---|:---|:---:|:---:|
+| `main` | شاخه اصلی پروداکشن؛ نمایانگر نسخه نهایی و پایدار وب‌سایت که متصل به پایپ‌لاین استقرار خودکار است. | — | — |
+| `develop` | شاخه یکپارچه‌سازی (Integration)؛ تمام قابلیت‌های جدید ابتدا در این شاخه با یکدیگر ترکیب و تست می‌شوند. | `main` | `main` |
+| `feature/ui-foundation` | پیاده‌سازی اسکلت بصری، منوبار، بنر اصلی، درباره ما، فرم تماس و فوتر. | `develop` | `develop` |
+| `feature/menu-system` | پیاده‌سازی ساختار داده محصولات، کامپوننت کارت‌ها، لیست منو، تب‌های فیلتر و نوار جستجو. | `develop` | `develop` (همراه با حل تعارض ۱) |
+| `feature/theme-polish` | اعمال ریزانیمیشن‌ها، افکت‌های Hover، استایل‌های شیشه‌ای و بهبود جلوه‌های تعاملی. | `develop` | `develop` (همراه با حل تعارض ۲) |
+| `feature/deployment` | پیکربندی اکشن‌های گیت‌هاب و تنظیم Base Path پروژه برای GitHub Pages. | `develop` | `develop` |
 
-\---
+---
 
-**# 6. تاریخچه Commitها (Commit History)**
+# 6. تاریخچه Commitها (Commit History)
 
-کلیه کامیت‌های پروژه با رعایت اصول **\*\*Atomic Commits\*\*** و بر اساس استاندارد **\*\*Conventional Commits\*\*** ثبت شده‌اند؛ بدین معنا که هر کامیت تنها یک تغییر مشخص، مستقل و معنادار را پوشش می‌دهد.
+کلیه کامیت‌های پروژه با رعایت اصول **Atomic Commits** و بر اساس استاندارد **Conventional Commits** ثبت شده‌اند؛ بدین معنا که هر کامیت تنها یک تغییر مشخص، مستقل و معنادار را پوشش می‌دهد.
 
-در مجموع **\*\*۲۷ کامیت معنادار\*\*** در فرآیند توسعه این پروژه به ثبت رسیده که مشخصات کامل آن‌ها به شرح زیر است:
+در مجموع **۲۷ کامیت معنادار** در فرآیند توسعه این پروژه به ثبت رسیده که مشخصات کامل آن‌ها به شرح زیر است:
 
-\| # | Hash خلاصه | Full Hash (هش کامل کامیت) | پیام کامیت (Commit Message) | توضیح تغییر و دستاورد | شاخه |
-\|:---:|:---:|:---|:---|:---|:---:|
-\| ۱ | \`c2c50dc\` | \`c2c50dcff7fb724d7306fa121b2d3368de44a71e\` | \`chore: initialize React project with Vite\` | ساخت پروژه اولیه با قالب React و Vite | \`main\` |
-\| ۲ | \`61d1f94\` | \`61d1f94fb005712c93ea47665493060e697af932\` | \`chore: configure .gitignore and project metadata\` | پیکربندی فایل \`.gitignore\`، متادیتا و توضیحات پکیج | \`develop\` |
-\| ۳ | \`a33591b\` | \`a33591bc13e4d370f619f8c9765fe42d8ad0fb64\` | \`feat: create base application structure\` | ساختاربندی اولیه پوشه‌ها و فایل‌های کامپوننت در پروژه | \`develop\` |
-\| ۴ | \`8cf8345\` | \`8cf83453aab86769f1bc2e7354f177a04a50c267\` | \`style: establish antique visual theme and design tokens\` | ایجاد توکن‌های طراحی (متغیرهای CSS رنگ‌ها، فونت و فواصل) | \`develop\` |
-\| ۵ | \`23f1ef0\` | \`23f1ef004ff9ad188d8f8292ef6efb8e18be4cbe\` | \`feat: implement responsive navigation bar\` | پیاده‌سازی نوار ناوبری ثابت به همراه دکمه منوی موبایل | \`feature/ui-foundation\` |
-\| ۶ | \`dfd606d\` | \`dfd606d3ff6d386325c83fbd1b301d8633c6c3c1\` | \`feat: implement hero section with atmospheric design and visual assets\` | ساخت بخش آغازین (Hero) به همراه تصویر بنر و دکمه‌های اکشن | \`feature/ui-foundation\` |
-\| ۷ | \`7262164\` | \`7262164fd4e893504a2fbc1f49e19ec030480b76\` | \`feat: implement about section\` | پیاده‌سازی بخش درباره ما و فلسفه کافه آنتیک | \`feature/ui-foundation\` |
-\| ۸ | \`55f9d9a\` | \`55f9d9ac8e03aaaff2ad34b3cf79611299a40628\` | \`feat: implement visit-us contact section\` | پیاده‌سازی بخش تماس با ما، ساعات کاری و آدرس شعبه | \`feature/ui-foundation\` |
-\| ۹ | \`778308a\` | \`778308a3c6e841171a8722b67cd5811c79d0deb1\` | \`feat: implement footer component\` | ساخت کامپوننت فوتر با پیوندها و حق کپی‌رایت | \`feature/ui-foundation\` |
-\| ۱۰ | \`77b5178\` | \`77b517880cfd9af5f75df2a95def8625ad7986c4\` | \`feat: integrate ui-foundation sections into app\` | اتصال و چیدمان کامپوننت‌های اولیه در کامپوننت اصلی \`App.jsx\` | \`feature/ui-foundation\` |
-\| ۱۱ | \`a99c44f\` | \`a99c44fd0f6f0c27b5a843587906874adc9fb8f8\` | \`feat: create menu data model with 20+ items\` | تعریف مدل داده منو (\`menuData.js\`) با بیش از ۲۵ قلم محصول | \`feature/menu-system\` |
-\| ۱۲ | \`a7a7c07\` | \`a7a7c071f30d0095e6e6dc553249b7ce8a67c22d\` | \`feat: implement MenuItem card component\` | پیاده‌سازی کارت تکی نمایش محصول با برچسب قیمت و ویژگی‌ها | \`feature/menu-system\` |
-\| ۱۳ | \`13734c3\` | \`13734c3390eae005ee2b1bfd7c2e6af6c80d2a90\` | \`feat: implement featured menu section\` | پیاده‌سازی بخش نمایش آیتم‌های ویژه و منتخب منو | \`feature/menu-system\` |
-\| ۱۴ | \`444369d\` | \`444369d8aa6a80b15f75982e0686725bb9ebfce4\` | \`feat: implement category filter component\` | پیاده‌سازی تب‌های فیلتر دسته‌بندی به همراه مدیریت استیت | \`feature/menu-system\` |
-\| ۱۵ | \`21c59fa\` | \`21c59facc1733c22e5abeec61c949d7dbded12d5\` | \`feat: implement menu search functionality\` | پیاده‌سازی نوار جستجوی زنده برای فیلتر آنی محصولات | \`feature/menu-system\` |
-\| ۱۶ | \`c1f0916\` | \`c1f09169c2fa33701604bfc0e327005a0b3edfcb\` | \`feat: implement full menu section with filter and search\` | تجمیع فیلتر و جستجو و پیاده‌سازی گرید منوی تعاملی | \`feature/menu-system\` |
-\| ۱۷ | \`6339681\` | \`63396819cf2fd377aed1af48d082c4fa948c9e67\` | \`feat: integrate menu system into application\` | ادغام کامپوننت‌های منو در \`App.jsx\` و استایل‌های مربوطه | \`feature/menu-system\` |
-\| ۱۸ | \`9fe96e2\` | \`9fe96e26c6b2770c030102562fdeead0db4926a1\` | \`merge: resolve conflict integrating menu-system\` | **\*\*حل تعارض ۱:\*\*** ترکیب کدهای \`ui-foundation\` و \`menu-system\` در \`App.jsx\` و \`App.css\` | \`develop\` |
-\| ۱۹ | \`84036a4\` | \`84036a471cf2a3f1d546ee60b04db61fa4ccacf6\` | \`fix: resolve responsive navbar overflow on mobile\` | رفع مشکل سرریز و اسکرول افقی نوار ناوبری در نمایشگرهای موبایل | \`develop\` |
-\| ۲۰ | \`e041c9a\` | \`e041c9a4ea09d25221bebccb7fc7a7d65a046f55\` | \`style: refine animations and hover interactions\` | افزودن انیمیشن‌های نرم، ترنزیشن کارت‌ها و افکت‌های تعاملی | \`feature/theme-polish\` |
-\| ۲۱ | \`b21fa26\` | \`b21fa2689ad849a97b3cb3e1349e59ef2963e3f2\` | \`style: enhance navbar visual design and transitions\` | اعمال افکت بلور شیشه‌ای (Backdrop blur) و پولیش استایل Navbar | \`feature/theme-polish\` |
-\| ۲۲ | \`9ba158e\` | \`9ba158e901293be40596a3f4ec454c7619598f10\` | \`merge: resolve conflict integrating theme-polish\` | **\*\*حل تعارض ۲:\*\*** ترکیب فیکس ریسپانسیو و پولیش استایل‌ها در \`Navbar.jsx\` و \`index.css\` | \`develop\` |
-\| ۲۳ | \`98a96b0\` | \`98a96b04b5460f1310637bd19f6997840ac9609e\` | \`ci: configure GitHub Actions for Pages deployment\` | ساخت پایپ‌لاین بیلد و استقرار خودکار در فایل \`.github/workflows/deploy.yml\` | \`feature/deployment\` |
-\| ۲۴ | \`4087f57\` | \`4087f579b8ceb7c38b1b7b277ad52dc97d6433cf\` | \`build: configure Vite base path for GitHub Pages\` | تنظیم مسیر پایه (\`base: '/anteiku/'\`) در فایل \`vite.config.js\` | \`feature/deployment\` |
-\| ۲۵ | \`eb386c3\` | \`eb386c3d78d04bc1d2dd9b6caa97abafd258894e\` | \`docs: write comprehensive project README\` | نگارش گزارش جامع مستندات پروژه، دیاگرام‌ها و پاسخ به پرسش‌ها | \`develop\` |
-\| ۲۶ | \`260c6f8\` | \`260c6f8c40fbb19d2825d66f595daa72441fb358\` | \`Merge pull request #2 from Hosein1011/develop\` | **\*\*ادغام PR #2:\*\*** ادغام شاخه \`develop\` به شاخه \`main\` از طریق Pull Request | \`main\` |
-\| ۲۸ | \`af67a02\` | \`af67a0230505c5a12d26dc2213ee7b7354425dc5\` | \`merge: release v1.0 — complete ANTIQUE website\` | **\*\*انتشار نهایی:\*\*** ادغام آخرین تغییرات مستندات روی شاخه اصلی \`main\` | \`main\` |
+| # | Hash خلاصه | Full Hash (هش کامل کامیت) | پیام کامیت (Commit Message) | توضیح تغییر و دستاورد | شاخه |
+|:---:|:---:|:---|:---|:---|:---:|
+| ۱ | `c2c50dc` | `c2c50dcff7fb724d7306fa121b2d3368de44a71e` | `chore: initialize React project with Vite` | ساخت پروژه اولیه با قالب React و Vite | `main` |
+| ۲ | `61d1f94` | `61d1f94fb005712c93ea47665493060e697af932` | `chore: configure .gitignore and project metadata` | پیکربندی فایل `.gitignore`، متادیتا و توضیحات پکیج | `develop` |
+| ۳ | `a33591b` | `a33591bc13e4d370f619f8c9765fe42d8ad0fb64` | `feat: create base application structure` | ساختاربندی اولیه پوشه‌ها و فایل‌های کامپوننت در پروژه | `develop` |
+| ۴ | `8cf8345` | `8cf83453aab86769f1bc2e7354f177a04a50c267` | `style: establish antique visual theme and design tokens` | ایجاد توکن‌های طراحی (متغیرهای CSS رنگ‌ها، فونت و فواصل) | `develop` |
+| ۵ | `23f1ef0` | `23f1ef004ff9ad188d8f8292ef6efb8e18be4cbe` | `feat: implement responsive navigation bar` | پیاده‌سازی نوار ناوبری ثابت به همراه دکمه منوی موبایل | `feature/ui-foundation` |
+| ۶ | `dfd606d` | `dfd606d3ff6d386325c83fbd1b301d8633c6c3c1` | `feat: implement hero section with atmospheric design and visual assets` | ساخت بخش آغازین (Hero) به همراه تصویر بنر و دکمه‌های اکشن | `feature/ui-foundation` |
+| ۷ | `7262164` | `7262164fd4e893504a2fbc1f49e19ec030480b76` | `feat: implement about section` | پیاده‌سازی بخش درباره ما و فلسفه کافه آنتیک | `feature/ui-foundation` |
+| ۸ | `55f9d9a` | `55f9d9ac8e03aaaff2ad34b3cf79611299a40628` | `feat: implement visit-us contact section` | پیاده‌سازی بخش تماس با ما، ساعات کاری و آدرس شعبه | `feature/ui-foundation` |
+| ۹ | `778308a` | `778308a3c6e841171a8722b67cd5811c79d0deb1` | `feat: implement footer component` | ساخت کامپوننت فوتر با پیوندها و حق کپی‌رایت | `feature/ui-foundation` |
+| ۱۰ | `77b5178` | `77b517880cfd9af5f75df2a95def8625ad7986c4` | `feat: integrate ui-foundation sections into app` | اتصال و چیدمان کامپوننت‌های اولیه در کامپوننت اصلی `App.jsx` | `feature/ui-foundation` |
+| ۱۱ | `a99c44f` | `a99c44fd0f6f0c27b5a843587906874adc9fb8f8` | `feat: create menu data model with 20+ items` | تعریف مدل داده منو (`menuData.js`) با بیش از ۲۵ قلم محصول | `feature/menu-system` |
+| ۱۲ | `a7a7c07` | `a7a7c071f30d0095e6e6dc553249b7ce8a67c22d` | `feat: implement MenuItem card component` | پیاده‌سازی کارت تکی نمایش محصول با برچسب قیمت و ویژگی‌ها | `feature/menu-system` |
+| ۱۳ | `13734c3` | `13734c3390eae005ee2b1bfd7c2e6af6c80d2a90` | `feat: implement featured menu section` | پیاده‌سازی بخش نمایش آیتم‌های ویژه و منتخب منو | `feature/menu-system` |
+| ۱۴ | `444369d` | `444369d8aa6a80b15f75982e0686725bb9ebfce4` | `feat: implement category filter component` | پیاده‌سازی تب‌های فیلتر دسته‌بندی به همراه مدیریت استیت | `feature/menu-system` |
+| ۱۵ | `21c59fa` | `21c59facc1733c22e5abeec61c949d7dbded12d5` | `feat: implement menu search functionality` | پیاده‌سازی نوار جستجوی زنده برای فیلتر آنی محصولات | `feature/menu-system` |
+| ۱۶ | `c1f0916` | `c1f09169c2fa33701604bfc0e327005a0b3edfcb` | `feat: implement full menu section with filter and search` | تجمیع فیلتر و جستجو و پیاده‌سازی گرید منوی تعاملی | `feature/menu-system` |
+| ۱۷ | `6339681` | `63396819cf2fd377aed1af48d082c4fa948c9e67` | `feat: integrate menu system into application` | ادغام کامپوننت‌های منو در `App.jsx` و استایل‌های مربوطه | `feature/menu-system` |
+| ۱۸ | `9fe96e2` | `9fe96e26c6b2770c030102562fdeead0db4926a1` | `merge: resolve conflict integrating menu-system` | **حل تعارض ۱:** ترکیب کدهای `ui-foundation` و `menu-system` در `App.jsx` و `App.css` | `develop` |
+| ۱۹ | `84036a4` | `84036a471cf2a3f1d546ee60b04db61fa4ccacf6` | `fix: resolve responsive navbar overflow on mobile` | رفع مشکل سرریز و اسکرول افقی نوار ناوبری در نمایشگرهای موبایل | `develop` |
+| ۲۰ | `e041c9a` | `e041c9a4ea09d25221bebccb7fc7a7d65a046f55` | `style: refine animations and hover interactions` | افزودن انیمیشن‌های نرم، ترنزیشن کارت‌ها و افکت‌های تعاملی | `feature/theme-polish` |
+| ۲۱ | `b21fa26` | `b21fa2689ad849a97b3cb3e1349e59ef2963e3f2` | `style: enhance navbar visual design and transitions` | اعمال افکت بلور شیشه‌ای (Backdrop blur) و پولیش استایل Navbar | `feature/theme-polish` |
+| ۲۲ | `9ba158e` | `9ba158e901293be40596a3f4ec454c7619598f10` | `merge: resolve conflict integrating theme-polish` | **حل تعارض ۲:** ترکیب فیکس ریسپانسیو و پولیش استایل‌ها در `Navbar.jsx` و `index.css` | `develop` |
+| ۲۳ | `98a96b0` | `98a96b04b5460f1310637bd19f6997840ac9609e` | `ci: configure GitHub Actions for Pages deployment` | ساخت پایپ‌لاین بیلد و استقرار خودکار در فایل `.github/workflows/deploy.yml` | `feature/deployment` |
+| ۲۴ | `4087f57` | `4087f579b8ceb7c38b1b7b277ad52dc97d6433cf` | `build: configure Vite base path for GitHub Pages` | تنظیم مسیر پایه (`base: '/anteiku/'`) در فایل `vite.config.js` | `feature/deployment` |
+| ۲۵ | `eb386c3` | `eb386c3d78d04bc1d2dd9b6caa97abafd258894e` | `docs: write comprehensive project README` | نگارش گزارش جامع مستندات پروژه، دیاگرام‌ها و پاسخ به پرسش‌ها | `develop` |
+| ۲۶ | `260c6f8` | `260c6f8c40fbb19d2825d66f595daa72441fb358` | `Merge pull request #2 from Hosein1011/develop` | **ادغام PR #2:** ادغام شاخه `develop` به شاخه `main` از طریق Pull Request | `main` |
+| ۲۸ | `af67a02` | `af67a0230505c5a12d26dc2213ee7b7354425dc5` | `merge: release v1.0 — complete ANTIQUE website` | **انتشار نهایی:** ادغام آخرین تغییرات مستندات روی شاخه اصلی `main` | `main` |
 
-\---
+---
 
-**# 7. مدیریت و حل تعارض‌ها (Conflict Resolution)**
+# 7. مدیریت و حل تعارض‌ها (Conflict Resolution)
 
-یکی از بخش‌های کلیدی این آزمایش، شبیه‌سازی و مدیریت صحیح شرایط تعارض کد (Merge Conflict) هنگام کار تیمی هم‌زمان بود. در این پروژه **\*\*دو تعارض واقعی و معنادار\*\*** رخ داده و با دقت حل گردید:
+یکی از بخش‌های کلیدی این آزمایش، شبیه‌سازی و مدیریت صحیح شرایط تعارض کد (Merge Conflict) هنگام کار تیمی هم‌زمان بود. در این پروژه **دو تعارض واقعی و معنادار** رخ داده و با دقت حل گردید:
 
-\---
+---
 
-**## تعارض اول (Conflict #1: ادغام سیستم منو در برنامه)**
+## تعارض اول (Conflict #1: ادغام سیستم منو در برنامه)
 
-**### ۱. منشأ و علت تعارض:**
-شاخه \`feature/ui-foundation\` کامپوننت‌های اولیه (\`Navbar\`, \`Hero\`, \`About\`, \`Contact\`, \`Footer\`) را توسعه داده و در فایل‌های \`src/App.jsx\` و \`src/App.css\` وارد کرد. هم‌زمان، شاخه \`feature/menu-system\` کامپوننت‌های منو (\`FeaturedMenu\`, \`Menu\`, \`CategoryFilter\`, \`MenuItem\`) را ساخت و آن‌ها را نیز در همان خطوط از فایل‌های \`src/App.jsx\` و \`src/App.css\` ایمپورت کرد.
-هنگام ادغام شاخه \`feature/menu-system\` در \`develop\`، گیت به دلیل هم‌پوشانی تغییرات در بخش‌های یکسان از فایل‌ها، با تعارض متوقف شد:
+### ۱. منشأ و علت تعارض:
+شاخه `feature/ui-foundation` کامپوننت‌های اولیه (`Navbar`, `Hero`, `About`, `Contact`, `Footer`) را توسعه داده و در فایل‌های `src/App.jsx` و `src/App.css` وارد کرد. هم‌زمان، شاخه `feature/menu-system` کامپوننت‌های منو (`FeaturedMenu`, `Menu`, `CategoryFilter`, `MenuItem`) را ساخت و آن‌ها را نیز در همان خطوط از فایل‌های `src/App.jsx` و `src/App.css` ایمپورت کرد.
+هنگام ادغام شاخه `feature/menu-system` در `develop`، گیت به دلیل هم‌پوشانی تغییرات در بخش‌های یکسان از فایل‌ها، با تعارض متوقف شد:
 
-\`\`\`text
+```text
 feature/ui-foundation (توسعه ساختار پایه در App.jsx) ──┐
-                                                      ├──> [CONFLICT in App.jsx & App.css]
-feature/menu-system   (توسعه سیستم منو در App.jsx) ────┘
-\`\`\`
+                                                      ├──> [CONFLICT in App.jsx & App.css]
+feature/menu-system   (توسعه سیستم منو در App.jsx) ────┘
+```
 
-**### ۲. فایل‌های دارای تعارض:**
-\- \`src/App.jsx\`
-\- \`src/App.css\`
+### ۲. فایل‌های دارای تعارض:
+- `src/App.jsx`
+- `src/App.css`
 
-**### ۳. نحوه حل تعارض و تصمیم فنی:**
+### ۳. نحوه حل تعارض و تصمیم فنی:
 هدف از حل تعارض حذف هیچ‌یک از دو قابلیت نبود، بلکه ترکیب هماهنگ هر دو شاخه مدنظر قرار گرفت. به این منظور:
-\- در \`src/App.jsx\`: تمام ایمپورت‌های هر دو بخش حفظ و سکشن‌های \`Hero\`، سپس \`FeaturedMenu\`، سپس \`Menu\`، سپس \`About\`، \`Contact\` و \`Footer\` به صورت منظم در ساختار رندر قرار گرفتند.
-\- در \`src/App.css\`: استایل‌های پایه لایه‌بندی و استایل‌های شبکه گرید منو در کنار یکدیگر تجمیع شدند.
+- در `src/App.jsx`: تمام ایمپورت‌های هر دو بخش حفظ و سکشن‌های `Hero`، سپس `FeaturedMenu`، سپس `Menu`، سپس `About`، `Contact` و `Footer` به صورت منظم در ساختار رندر قرار گرفتند.
+- در `src/App.css`: استایل‌های پایه لایه‌بندی و استایل‌های شبکه گرید منو در کنار یکدیگر تجمیع شدند.
 
-**### ۴. دستورات اجرا شده:**
-\`\`\`bash
+### ۴. دستورات اجرا شده:
+```bash
 git switch develop
 git merge feature/menu-system
-\# گیت اعلام تعارض کرد (Auto-merging failed)
-\# رفع دستی نشانگرهای <<<<<<< , ======= , >>>>>>>
+# گیت اعلام تعارض کرد (Auto-merging failed)
+# رفع دستی نشانگرهای <<<<<<< , ======= , >>>>>>>
 git add src/App.jsx src/App.css
 git commit -m "merge: resolve conflict integrating menu-system"
-\`\`\`
-\- **\*\*هش کامیت حل تعارض ۱:\*\*** \`9fe96e2\` (\`9fe96e26c6b2770c030102562fdeead0db4926a1\`)
+```
+- **هش کامیت حل تعارض ۱:** `9fe96e2` (`9fe96e26c6b2770c030102562fdeead0db4926a1`)
 
-\---
+---
 
-**## تعارض دوم (Conflict #2: پولیش بصری و رفع باگ موبایل)**
+## تعارض دوم (Conflict #2: پولیش بصری و رفع باگ موبایل)
 
-**### ۱. منشأ و علت تعارض:**
-در شاخه \`develop\`، باگ سرریز و اسکرول ناخواسته افقی در منوی ریسپانسیو موبایل با ایجاد تغییراتی در \`src/components/Navbar.jsx\` و \`src/index.css\` برطرف شد (کامیت \`84036a4\`).
-هم‌زمان در شاخه \`feature/theme-polish\`، بهبود افکت‌های بصری شیشه‌ای (Glassmorphism) و انیمیشن‌های ترنزیشن روی همان کلاس‌ها و کدهای کامپوننت \`Navbar.jsx\` و فایل \`index.css\` اعمال شد (کامیت \`b21fa26\`).
-هنگام تلاش برای ادغام \`feature/theme-polish\` به شاخه \`develop\`، تعارض دوم رخ داد.
+### ۱. منشأ و علت تعارض:
+در شاخه `develop`، باگ سرریز و اسکرول ناخواسته افقی در منوی ریسپانسیو موبایل با ایجاد تغییراتی در `src/components/Navbar.jsx` و `src/index.css` برطرف شد (کامیت `84036a4`).
+هم‌زمان در شاخه `feature/theme-polish`، بهبود افکت‌های بصری شیشه‌ای (Glassmorphism) و انیمیشن‌های ترنزیشن روی همان کلاس‌ها و کدهای کامپوننت `Navbar.jsx` و فایل `index.css` اعمال شد (کامیت `b21fa26`).
+هنگام تلاش برای ادغام `feature/theme-polish` به شاخه `develop`، تعارض دوم رخ داد.
 
-\`\`\`text
-develop               (اعمال اصلاحات واکنش‌گرایی در Navbar) ──┐
-                                                             ├──> [CONFLICT in Navbar.jsx & index.css]
-feature/theme-polish  (اعمال افکت‌های شیشه‌ای و انیمیشن) ────┘
-\`\`\`
+```text
+develop               (اعمال اصلاحات واکنش‌گرایی در Navbar) ──┐
+                                                             ├──> [CONFLICT in Navbar.jsx & index.css]
+feature/theme-polish  (اعمال افکت‌های شیشه‌ای و انیمیشن) ────┘
+```
 
-**### ۲. فایل‌های دارای تعارض:**
-\- \`src/components/Navbar.jsx\`
-\- \`src/index.css\`
+### ۲. فایل‌های دارای تعارض:
+- `src/components/Navbar.jsx`
+- `src/index.css`
 
-**### ۳. نحوه حل تعارض و تصمیم فنی:**
+### ۳. نحوه حل تعارض و تصمیم فنی:
 کدهای هر دو بخش با یکدیگر ادغام شدند به گونه‌ای که:
-\- رفتارهای مربوط به استیت باز و بسته شدن منوی موبایل و جلوگیری از سرریز (\`overflow-x: hidden\`) کاملاً حفظ شدند.
-\- هم‌زمان جلوه‌های استایل شیشه‌ای (\`backdrop-filter: blur(12px)\`) و ترنزیشن‌های نرم به نوار ناوبری اضافه گردیدند.
+- رفتارهای مربوط به استیت باز و بسته شدن منوی موبایل و جلوگیری از سرریز (`overflow-x: hidden`) کاملاً حفظ شدند.
+- هم‌زمان جلوه‌های استایل شیشه‌ای (`backdrop-filter: blur(12px)`) و ترنزیشن‌های نرم به نوار ناوبری اضافه گردیدند.
 
-**### ۴. دستورات اجرا شده:**
-\`\`\`bash
+### ۴. دستورات اجرا شده:
+```bash
 git switch develop
 git merge feature/theme-polish
-\# رفع تعارض‌های متنی در فایل‌های استایل و کامپوننت
+# رفع تعارض‌های متنی در فایل‌های استایل و کامپوننت
 git add src/components/Navbar.jsx src/index.css src/App.css
 git commit -m "merge: resolve conflict integrating theme-polish"
-\`\`\`
-\- **\*\*هش کامیت حل تعارض ۲:\*\*** \`9ba158e\` (\`9ba158e901293be40596a3f4ec454c7619598f10\`)
+```
+- **هش کامیت حل تعارض ۲:** `9ba158e` (`9ba158e901293be40596a3f4ec454c7619598f10`)
 
-\---
+---
 
-**# 8. مدیریت تغییرات با Pull Request**
+# 8. مدیریت تغییرات با Pull Request
 
-برای تضمین کیفیت کد و جلوگیری از اعمال تغییرات تأییدنشده روی شاخه‌های کلیدی، ادغام تغییرات در شاخه اصلی \`main\` صرفاً از طریق فرآیند **\*\*Pull Request (PR)\*\*** و پس از بازبینی کدهای منبع انجام شده است.
+برای تضمین کیفیت کد و جلوگیری از اعمال تغییرات تأییدنشده روی شاخه‌های کلیدی، ادغام تغییرات در شاخه اصلی `main` صرفاً از طریق فرآیند **Pull Request (PR)** و پس از بازبینی کدهای منبع انجام شده است.
 
-**### فهرست Pull Requestهای مخزن:**
+### فهرست Pull Requestهای مخزن:
 
-\| شماره PR | عنوان Pull Request | شاخه مبدأ (Source) | شاخه مقصد (Target) | وضعیت | هش کامیت مرج | لینک مستقیم |
-\|:---:|:---|:---:|:---:|:---:|:---:|:---:|
-\| **\*\*PR #2\*\*** | **\*\*Develop\*\*** (ادغام کلیه قابلیت‌های وب‌سایت در شاخه اصلی) | \`develop\` | \`main\` | **\*\*Merged\*\*** ✅ | \`260c6f8\` | [مشاهده PR #2]\(https\://github.com/Hosein1011/anteiku/pull/2) |
-\| **\*\*PR #29\*\*** | Initial project setup with automated deployment | \`feature/setup\` | \`main\` | **\*\*Merged\*\*** ✅ | \`62d79dd\` | [مشاهده PR #29]\(https\://github.com/Hosein1011/anteiku/pull/29) |
-\| **\*\*PR #30\*\*** | Revert experimental deployment sync | \`revert-29\` | \`main\` | **\*\*Merged\*\*** ✅ | \`e09f84c\` | [مشاهده PR #30]\(https\://github.com/Hosein1011/anteiku/pull/30) |
+| شماره PR | عنوان Pull Request | شاخه مبدأ (Source) | شاخه مقصد (Target) | وضعیت | هش کامیت مرج | لینک مستقیم |
+|:---:|:---|:---:|:---:|:---:|:---:|:---:|
+| **PR #2** | **Develop** (ادغام کلیه قابلیت‌های وب‌سایت در شاخه اصلی) | `develop` | `main` | **Merged** ✅ | `260c6f8` | [مشاهده PR #2](https://github.com/Hosein1011/anteiku/pull/2) |
+| **PR #29** | Initial project setup with automated deployment | `feature/setup` | `main` | **Merged** ✅ | `62d79dd` | [مشاهده PR #29](https://github.com/Hosein1011/anteiku/pull/29) |
+| **PR #30** | Revert experimental deployment sync | `revert-29` | `main` | **Merged** ✅ | `e09f84c` | [مشاهده PR #30](https://github.com/Hosein1011/anteiku/pull/30) |
 
-\---
+---
 
-**# 9. محافظت از شاخه اصلی (Branch Protection)**
+# 9. محافظت از شاخه اصلی (Branch Protection)
 
-شاخه \`main\` به عنوان نسخه پروداکشن پروژه تحت قوانین محافظتی (Branch Protection Rules) در پنل تنظیمات GitHub پیکربندی شده است:
+شاخه `main` به عنوان نسخه پروداکشن پروژه تحت قوانین محافظتی (Branch Protection Rules) در پنل تنظیمات GitHub پیکربندی شده است:
 
-**### قوانین اعمال‌شده روی شاخه \`main\`:**
-1\. **\*\*Require a pull request before merging:\*\*** پوش مستقیم (Direct Push) به شاخه \`main\` کاملاً مسدود بوده و هر تغییری الزماً باید در قالب یک PR ارسال شود.
-2\. **\*\*Require approvals:\*\*** ادغام PR مستلزم تأیید و Review حداقل یکی از هم‌تیمی‌ها است.
-3\. **\*\*Dismiss stale pull request approvals when new commits are pushed:\*\*** با ارسال کامیت جدید به PR، تأییدیه‌های قبلی به صورت خودکار باطل شده و نیاز به بررسی مجدد دارند.
-4\. **\*\*Require status checks to pass before merging:\*\*** اجرای موفق پایپ‌لاین تست و بیلد گیت‌هاب اکشنز پیش از ادغام ضروری است.
-5\. **\*\*Do not allow bypassing the above settings:\*\*** هیچ کاربری (حتی مدیر مخزن) اجازه دور زدن این محدودیت‌ها را ندارد.
+### قوانین اعمال‌شده روی شاخه `main`:
+1. **Require a pull request before merging:** پوش مستقیم (Direct Push) به شاخه `main` کاملاً مسدود بوده و هر تغییری الزماً باید در قالب یک PR ارسال شود.
+2. **Require approvals:** ادغام PR مستلزم تأیید و Review حداقل یکی از هم‌تیمی‌ها است.
+3. **Dismiss stale pull request approvals when new commits are pushed:** با ارسال کامیت جدید به PR، تأییدیه‌های قبلی به صورت خودکار باطل شده و نیاز به بررسی مجدد دارند.
+4. **Require status checks to pass before merging:** اجرای موفق پایپ‌لاین تست و بیلد گیت‌هاب اکشنز پیش از ادغام ضروری است.
+5. **Do not allow bypassing the above settings:** هیچ کاربری (حتی مدیر مخزن) اجازه دور زدن این محدودیت‌ها را ندارد.
 
-\---
+---
 
-**# 10. استقرار پیوسته با GitHub Actions**
+# 10. استقرار پیوسته با GitHub Actions
 
-فرآیند Continuous Deployment با استفاده از **\*\*GitHub Actions\*\*** و از طریق فایل پیکربندی [\`.github/workflows/deploy.yml\`]\(.github/workflows/deploy.yml) پیاده‌سازی شده است.
+فرآیند Continuous Deployment با استفاده از **GitHub Actions** و از طریق فایل پیکربندی [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) پیاده‌سازی شده است.
 
-**### گردش‌کار (Workflow) استقرار:**
-با هر \`push\` به شاخه \`main\` یا فعال‌سازی دستی از طریق \`workflow\_dispatch\`، مراحل زیر به صورت خودکار در محیط ابری اوبونتو اجرا می‌شوند:
+### گردش‌کار (Workflow) استقرار:
+با هر `push` به شاخه `main` یا فعال‌سازی دستی از طریق `workflow_dispatch`، مراحل زیر به صورت خودکار در محیط ابری اوبونتو اجرا می‌شوند:
 
-\`\`\`text
+```text
 [Push / Merge to main]
-          │
-          ▼
-1\. Checkout مخزن با \`actions/checkout\@v4\`
-          │
-          ▼
-2\. راه‌اندازی محیط Node.js نسخه ۲۰ با کش npm با \`actions/setup-node\@v4\`
-          │
-          ▼
-3\. نصب دقیق وابستگی‌ها با دستور \`npm ci\`
-          │
-          ▼
-4\. کامپایل و بیلد پروداکشن پروژه با دستور \`npm run build\`
-          │
-          ▼
-5\. آماده‌سازی تنظیمات با \`actions/configure-pages\@v5\`
-          │
-          ▼
-6\. آپلود فایل‌های بیلدشده در پوشه \`./dist\` با \`actions/upload-pages-artifact\@v3\`
-          │
-          ▼
-7\. استقرار مستقیم روی هاست GitHub Pages با \`actions/deploy-pages\@v4\`
-          │
-          ▼
+          │
+          ▼
+1. Checkout مخزن با `actions/checkout@v4`
+          │
+          ▼
+2. راه‌اندازی محیط Node.js نسخه ۲۰ با کش npm با `actions/setup-node@v4`
+          │
+          ▼
+3. نصب دقیق وابستگی‌ها با دستور `npm ci`
+          │
+          ▼
+4. کامپایل و بیلد پروداکشن پروژه با دستور `npm run build`
+          │
+          ▼
+5. آماده‌سازی تنظیمات با `actions/configure-pages@v5`
+          │
+          ▼
+6. آپلود فایل‌های بیلدشده در پوشه `./dist` با `actions/upload-pages-artifact@v3`
+          │
+          ▼
+7. استقرار مستقیم روی هاست GitHub Pages با `actions/deploy-pages@v4`
+          │
+          ▼
 [وب‌سایت در دسترس کاربران قرار می‌گیرد]
-\`\`\`
+```
 
-**### تنظیم Base Path در Vite:**
-از آنجا که مخزن در آدرس \`https\://Hosein1011.github.io/anteiku/\` مستقر می‌شود، در فایل \`vite.config.js\` مسیر پایه به صورت زیر تنظیم شده تا ارجاع به تمامی فایل‌های باندل JS و CSS و است‌های استاتیک بدون خطای ۴۰۴ لود شوند:
+### تنظیم Base Path در Vite:
+از آنجا که مخزن در آدرس `https://Hosein1011.github.io/anteiku/` مستقر می‌شود، در فایل `vite.config.js` مسیر پایه به صورت زیر تنظیم شده تا ارجاع به تمامی فایل‌های باندل JS و CSS و است‌های استاتیک بدون خطای ۴۰۴ لود شوند:
 
-\`\`\`javascript
+```javascript
 // vite.config.js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  plugins: [react()],
-  base: '/anteiku/',
+  plugins: [react()],
+  base: '/anteiku/',
 })
-\`\`\`
+```
 
-\---
+---
 
-**# 11. ساختار کلی فرآیند توسعه**
+# 11. ساختار کلی فرآیند توسعه
 
 نمودار زیر گام‌های پیموده شده از آغاز پروژه تا تحویل نهایی را نمایش می‌دهد:
 
-\`\`\`mermaid
+```mermaid
 flowchart TD
-    A[شروع پروژه و مقداردهی اولیه] --> B[ساخت پروژه با Vite + React]
-    B --> C[راه‌اندازی مخزن Git و تنظیم gitignore]
-    C --> D[ایجاد شاخه develop و شاخه‌های Feature]
-    D --> E[توسعه UI Foundation]
-    D --> F[توسعه Menu System]
-    E --> G[Merge شاخه UI Foundation]
-    F --> H[Merge شاخه Menu System]
-    G & H --> I{بروز Conflict #1 در App.jsx}
-    I --> J[حل تعارض #1 و تثبیت در develop]
-    J --> K[اعمال Responsive Fix موبایل]
-    J --> L[توسعه Theme Polish و انیمیشن‌ها]
-    K & L --> M{بروز Conflict #2 در Navbar}
-    M --> N[حل تعارض #2 و تثبیت در develop]
-    N --> O[پیکربندی GitHub Actions و Base Path]
-    O --> P[ایجاد Pull Request به شاخه main]
-    P --> Q[تأیید و Merge به شاخه main]
-    Q --> R[اجرای خودکار پایپ‌لاین CI/CD]
-    R --> S[استقرار موفق روی GitHub Pages]
-\`\`\`
+    A[شروع پروژه و مقداردهی اولیه] --> B[ساخت پروژه با Vite + React]
+    B --> C[راه‌اندازی مخزن Git و تنظیم gitignore]
+    C --> D[ایجاد شاخه develop و شاخه‌های Feature]
+    D --> E[توسعه UI Foundation]
+    D --> F[توسعه Menu System]
+    E --> G[Merge شاخه UI Foundation]
+    F --> H[Merge شاخه Menu System]
+    G & H --> I{بروز Conflict #1 در App.jsx}
+    I --> J[حل تعارض #1 و تثبیت در develop]
+    J --> K[اعمال Responsive Fix موبایل]
+    J --> L[توسعه Theme Polish و انیمیشن‌ها]
+    K & L --> M{بروز Conflict #2 در Navbar}
+    M --> N[حل تعارض #2 و تثبیت در develop]
+    N --> O[پیکربندی GitHub Actions و Base Path]
+    O --> P[ایجاد Pull Request به شاخه main]
+    P --> Q[تأیید و Merge به شاخه main]
+    Q --> R[اجرای خودکار پایپ‌لاین CI/CD]
+    R --> S[استقرار موفق روی GitHub Pages]
+```
 
-\---
+---
 
-**# 12. پاسخ جامع به پرسش‌های مفهومی**
+# 12. پاسخ جامع به پرسش‌های مفهومی
 
-\---
+---
 
-**### پرسش ۱: پوشه \`.git\` چیست و چه محتویاتی دارد؟ دستور \`git init\` چه کاری انجام می‌دهد؟**
+### پرسش ۱: پوشه `.git` چیست و چه محتویاتی دارد؟ دستور `git init` چه کاری انجام می‌دهد؟
 
-**\*\*پاسخ:\*\***  
-پوشه پنهان \`.git\` قلب تپنده و دیتابیس داخلی مخزن محلی (Local Repository) در گیت است. تمام اطلاعات مربوط به ردگیری فایل‌ها، تاریخچه کامیت‌ها، شاخه‌ها، تگ‌ها، ریموت‌ها و پیکربندی‌های اختصاصی مخزن در این پوشه ذخیره می‌شوند. اگر این پوشه حذف شود، پروژه ساختار گیت خود را از دست داده و تبدیل به یک پوشه معمولی بدون تاریخچه می‌شود.
+**پاسخ:**
+پوشه پنهان `.git` قلب تپنده و دیتابیس داخلی مخزن محلی (Local Repository) در گیت است. تمام اطلاعات مربوط به ردگیری فایل‌ها، تاریخچه کامیت‌ها، شاخه‌ها، تگ‌ها، ریموت‌ها و پیکربندی‌های اختصاصی مخزن در این پوشه ذخیره می‌شوند. اگر این پوشه حذف شود، پروژه ساختار گیت خود را از دست داده و تبدیل به یک پوشه معمولی بدون تاریخچه می‌شود.
 
-اجزای اصلی داخل پوشه \`.git\` عبارت‌اند از:
-1\. **\*\*\`objects/\`:\*\*** پایگاه داده مبتنی بر محتوا (Content-Addressable Database) که تمام داده‌ها را در قالب ۴ نوع شیء (\`blob\` برای محتوای فایل‌ها، \`tree\` برای ساختار دایرکتوری‌ها، \`commit\` برای اطلاعات کامیت‌ها، و \`annotated tag\`) با کلید هش SHA-1 نگهداری می‌کند.
-2\. **\*\*\`refs/\`:\*\*** اشاره‌گرهایی (Pointers) به کامیت‌ها شامل شاخه‌های محلی (\`refs/heads/\`)، شاخه‌های ریموت (\`refs/remotes/\`) و برچسب‌ها (\`refs/tags/\`).
-3\. **\*\*\`HEAD\`:\*\*** فایلی متنی که مشخص می‌کند در حال حاضر در کدام شاخه یا روی کدام کامیت (در حالت Detached HEAD) قرار داریم.
-4\. **\*\*\`index\` (یا Staging Area):\*\*** یک فایل باینری که اطلاعات وضعیت فایل‌های آماده‌شده برای کامیت بعدی را نگهداری می‌کند.
-5\. **\*\*\`config\`:\*\*** تنظیمات اختصاصی مخزن شامل آدرس‌های ریموت و اطلاعات کاربر.
-6\. **\*\*\`hooks/\`:\*\*** اسکریپت‌های خودکارسازی که در رویدادهای مختلف گیت (مانند pre-commit یا post-merge) اجرا می‌شوند.
+اجزای اصلی داخل پوشه `.git` عبارت‌اند از:
+1. **`objects/`:** پایگاه داده مبتنی بر محتوا (Content-Addressable Database) که تمام داده‌ها را در قالب ۴ نوع شیء (`blob` برای محتوای فایل‌ها، `tree` برای ساختار دایرکتوری‌ها، `commit` برای اطلاعات کامیت‌ها، و `annotated tag`) با کلید هش SHA-1 نگهداری می‌کند.
+2. **`refs/`:** اشاره‌گرهایی (Pointers) به کامیت‌ها شامل شاخه‌های محلی (`refs/heads/`)، شاخه‌های ریموت (`refs/remotes/`) و برچسب‌ها (`refs/tags/`).
+3. **`HEAD`:** فایلی متنی که مشخص می‌کند در حال حاضر در کدام شاخه یا روی کدام کامیت (در حالت Detached HEAD) قرار داریم.
+4. **`index` (یا Staging Area):** یک فایل باینری که اطلاعات وضعیت فایل‌های آماده‌شده برای کامیت بعدی را نگهداری می‌کند.
+5. **`config`:** تنظیمات اختصاصی مخزن شامل آدرس‌های ریموت و اطلاعات کاربر.
+6. **`hooks/`:** اسکریپت‌های خودکارسازی که در رویدادهای مختلف گیت (مانند pre-commit یا post-merge) اجرا می‌شوند.
 
-**\*\*عملکرد \`git init\`:\*\***  
-دستور \`git init\` یک مخزن گیت جدید و خالی در دایرکتوری جاری ایجاد می‌کند. این دستور پوشه \`.git\` را به همراه ساختار اولیه زیرپوشه‌ها (\`objects\`, \`refs\`, \`hooks\`) و فایل‌های پایه‌ای (\`HEAD\`, \`config\`) مقداردهی اولیه می‌نماید.
+**عملکرد `git init`:**
+دستور `git init` یک مخزن گیت جدید و خالی در دایرکتوری جاری ایجاد می‌کند. این دستور پوشه `.git` را به همراه ساختار اولیه زیرپوشه‌ها (`objects`, `refs`, `hooks`) و فایل‌های پایه‌ای (`HEAD`, `config`) مقداردهی اولیه می‌نماید.
 
-\---
+---
 
-**### پرسش ۲: مفهوم اتمیک (Atomic) بودن در Atomic Commit و Atomic Pull Request چیست و چه مزایایی دارد؟**
+### پرسش ۲: مفهوم اتمیک (Atomic) بودن در Atomic Commit و Atomic Pull Request چیست و چه مزایایی دارد؟
 
-**\*\*پاسخ:\*\***  
-مفهوم **\*\*اتمیک بودن\*\*** از دنیای فیزیک و پایگاه داده گرفته شده و به معنای «غیرقابل تفکیک بودن، واحد بودن و انجام به صورت همه یا هیچ» است.
+**پاسخ:**
+مفهوم **اتمیک بودن** از دنیای فیزیک و پایگاه داده گرفته شده و به معنای «غیرقابل تفکیک بودن، واحد بودن و انجام به صورت همه یا هیچ» است.
 
-**#### ۱. Atomic Commit (کامیت اتمیک):**
-کامیت اتمیک کامیتی است که دقیقاً **\*\*یک کار مشخص، منطقی و کامل\*\*** را انجام می‌دهد. این کامیت نباید شامل چند تغییر غیرمرتبط باشد و پروژه پس از اعمال آن باید در وضعیت سالم و قابل بیلد باقی بماند.
-\- **\*\*مزایا:\*\***
-  - سهولت در بازبینی کد (Code Review)
-  - امکان بازگردانی آسان (Revert) یک قابلیت خاص بدون آسیب به سایر بخش‌ها
-  - امکان استفاده دقیق از \`git bisect\` برای یافتن باگ‌ها
-  - امکان انتقال تمیز کامیت با \`git cherry-pick\`
+#### ۱. Atomic Commit (کامیت اتمیک):
+کامیت اتمیک کامیتی است که دقیقاً **یک کار مشخص، منطقی و کامل** را انجام می‌دهد. این کامیت نباید شامل چند تغییر غیرمرتبط باشد و پروژه پس از اعمال آن باید در وضعیت سالم و قابل بیلد باقی بماند.
+- **مزایا:**
+  - سهولت در بازبینی کد (Code Review)
+  - امکان بازگردانی آسان (Revert) یک قابلیت خاص بدون آسیب به سایر بخش‌ها
+  - امکان استفاده دقیق از `git bisect` برای یافتن باگ‌ها
+  - امکان انتقال تمیز کامیت با `git cherry-pick`
 
-**#### ۲. Atomic Pull Request (پول ریکوئست اتمیک):**
+#### ۲. Atomic Pull Request (پول ریکوئست اتمیک):
 یک Pull Request اتمیک، یک واحد منطقی از تغییرات (مانند یک فیچر مشخص یا رفع یک باگ) را بدون دربرداشتن تغییرات جانبی دیگر ارائه می‌دهد.
-\- **\*\*مزایا:\*\***
-  - سرعت و دقت بالای هم‌تیمی‌ها در Review کردن
-  - کاهش چشم‌گیر احتمال بروز تعارض‌های پیچیده در ادغام
-  - امکان Merge سریع‌تر و چرخه تحویل کوتاه‌تر
+- **مزایا:**
+  - سرعت و دقت بالای هم‌تیمی‌ها در Review کردن
+  - کاهش چشم‌گیر احتمال بروز تعارض‌های پیچیده در ادغام
+  - امکان Merge سریع‌تر و چرخه تحویل کوتاه‌تر
 
-\---
+---
 
-**### پرسش ۳: تفاوت میان دستورات \`fetch\`، \`pull\`، \`merge\`، \`rebase\` و \`cherry-pick\` چیست؟**
+### پرسش ۳: تفاوت میان دستورات `fetch`، `pull`، `merge`، `rebase` و `cherry-pick` چیست؟
 
-\| دستور | هدف و عملکرد | تأثیر روی Working Directory | وضعیت تاریخچه (History) |
-\|:---|:---|:---:|:---|
-\| **\*\*\`git fetch\`\*\*** | دریافت آخرین کامیت‌ها و شاخه‌ها از مخزن Remote بدون اعمال روی کدهای کاری محلی. | بدون تغییر | شاخه‌های ردیابی ریموت (\`origin/main\`) به‌روز می‌شوند. |
-\| **\*\*\`git pull\`\*\*** | معادل اجرای \`git fetch\` و سپس \`git merge\` (یا \`git rebase\`). داده‌ها را دریافت و در شاخه جاری اعمال می‌کند. | فایل‌های کاری به‌روز می‌شوند. | ممکن است یک Merge Commit جدید ایجاد کند. |
-\| **\*\*\`git merge\`\*\*** | دو شاخه تاریخچه را با یکدیگر پیوند می‌دهد. در صورت وجود شاخه‌بندی، یک Merge Commit با دو والد ایجاد می‌کند. | فایل‌های دو شاخه تلفیق می‌شوند. | تاریخچه واقعی و شاخه‌شاخه را به طور کامل حفظ می‌کند. |
-\| **\*\*\`git rebase\`\*\*** | نقطه پایه شاخه فعلی را به انتهای شاخه مقصد منتقل کرده و کامیت‌ها را تک‌تک دوباره می‌نویسد. | فایل‌ها مطابق توالی کامیت‌های بازنویسی‌شده تغییر می‌کنند. | تاریخچه‌ای کاملاً خطی، تمیز و بدون Merge Commit می‌سازد (هش کامیت‌ها تغییر می‌کند). |
-\| **\*\*\`git cherry-pick\`\*\*** | یک یا چند کامیت مشخص را از شاخه‌ای دیگر انتخاب کرده و عیناً روی نوک شاخه فعلی اعمال می‌کند. | تغییرات مربوط به آن کامیت خاص روی فایل‌ها اعمال می‌شود. | یک کامیت جدید با محتوای مشابه ولی هش متفاوت اضافه می‌کند. |
+| دستور | هدف و عملکرد | تأثیر روی Working Directory | وضعیت تاریخچه (History) |
+|:---|:---|:---:|:---|
+| **`git fetch`** | دریافت آخرین کامیت‌ها و شاخه‌ها از مخزن Remote بدون اعمال روی کدهای کاری محلی. | بدون تغییر | شاخه‌های ردیابی ریموت (`origin/main`) به‌روز می‌شوند. |
+| **`git pull`** | معادل اجرای `git fetch` و سپس `git merge` (یا `git rebase`). داده‌ها را دریافت و در شاخه جاری اعمال می‌کند. | فایل‌های کاری به‌روز می‌شوند. | ممکن است یک Merge Commit جدید ایجاد کند. |
+| **`git merge`** | دو شاخه تاریخچه را با یکدیگر پیوند می‌دهد. در صورت وجود شاخه‌بندی، یک Merge Commit با دو والد ایجاد می‌کند. | فایل‌های دو شاخه تلفیق می‌شوند. | تاریخچه واقعی و شاخه‌شاخه را به طور کامل حفظ می‌کند. |
+| **`git rebase`** | نقطه پایه شاخه فعلی را به انتهای شاخه مقصد منتقل کرده و کامیت‌ها را تک‌تک دوباره می‌نویسد. | فایل‌ها مطابق توالی کامیت‌های بازنویسی‌شده تغییر می‌کنند. | تاریخچه‌ای کاملاً خطی، تمیز و بدون Merge Commit می‌سازد (هش کامیت‌ها تغییر می‌کند). |
+| **`git cherry-pick`** | یک یا چند کامیت مشخص را از شاخه‌ای دیگر انتخاب کرده و عیناً روی نوک شاخه فعلی اعمال می‌کند. | تغییرات مربوط به آن کامیت خاص روی فایل‌ها اعمال می‌شود. | یک کامیت جدید با محتوای مشابه ولی هش متفاوت اضافه می‌کند. |
 
-\---
+---
 
-**### پرسش ۴: تفاوت میان دستورات \`reset\`، \`revert\`، \`restore\`، \`switch\` و \`checkout\` چیست؟**
+### پرسش ۴: تفاوت میان دستورات `reset`، `revert`، `restore`، `switch` و `checkout` چیست؟
 
-**#### ۱. \`git reset\` در برابر \`git revert\`:**
-\- **\*\*\`git reset\`:\*\*** اشاره‌گر \`HEAD\` را به یک کامیت قبلی به عقب برمی‌گرداند. این دستور بسته به فلگ‌هایش (\`--soft\`، \`--mixed\`، \`--hard\`) می‌تواند Staging Area و فایل‌های کاری را پاک کند. این دستور **\*\*تاریخچه را بازنویسی می‌کند\*\*** و نباید روی شاخه‌های اشتراکی و عمومی اجرا شود.
-\- **\*\*\`git revert\`:\*\*** برای خنثی کردن یک کامیت قبلی، یک **\*\*کامیت کاملاً جدید\*\*** ایجاد می‌کند که تغییرات متضاد آن کامیت را ثبت می‌نماید. تاریخچه دست‌نخورده باقی می‌ماند و این روش کاملاً در پروژه‌های اشتراکی ایمن است.
+#### ۱. `git reset` در برابر `git revert`:
+- **`git reset`:** اشاره‌گر `HEAD` را به یک کامیت قبلی به عقب برمی‌گرداند. این دستور بسته به فلگ‌هایش (`--soft`، `--mixed`، `--hard`) می‌تواند Staging Area و فایل‌های کاری را پاک کند. این دستور **تاریخچه را بازنویسی می‌کند** و نباید روی شاخه‌های اشتراکی و عمومی اجرا شود.
+- **`git revert`:** برای خنثی کردن یک کامیت قبلی، یک **کامیت کاملاً جدید** ایجاد می‌کند که تغییرات متضاد آن کامیت را ثبت می‌نماید. تاریخچه دست‌نخورده باقی می‌ماند و این روش کاملاً در پروژه‌های اشتراکی ایمن است.
 
-**#### ۲. \`git restore\`، \`git switch\` و جایگزینی دستور قدیمی \`git checkout\`:**
-در نسخه‌های قدیمی گیت، دستور \`git checkout\` هم برای جابه‌جایی شاخه‌ها و هم برای بازگرداندن فایل‌ها استفاده می‌شد که باعث سردرگمی بود. در نسخه‌های جدید:
-\- **\*\*\`git switch\`:\*\*** منحصراً برای ساخت یا تعویض شاخه‌ها به کار می‌رود (\`git switch develop\` یا \`git switch -c new-feature\`).
-\- **\*\*\`git restore\`:\*\*** منحصراً برای برگرداندن محتوای فایل‌ها در Working Directory یا خروج آن‌ها از Stage استفاده می‌شود (\`git restore app.js\` یا \`git restore --staged app.js\`).
+#### ۲. `git restore`، `git switch` و جایگزینی دستور قدیمی `git checkout`:
+در نسخه‌های قدیمی گیت، دستور `git checkout` هم برای جابه‌جایی شاخه‌ها و هم برای بازگرداندن فایل‌ها استفاده می‌شد که باعث سردرگمی بود. در نسخه‌های جدید:
+- **`git switch`:** منحصراً برای ساخت یا تعویض شاخه‌ها به کار می‌رود (`git switch develop` یا `git switch -c new-feature`).
+- **`git restore`:** منحصراً برای برگرداندن محتوای فایل‌ها در Working Directory یا خروج آن‌ها از Stage استفاده می‌شود (`git restore app.js` یا `git restore --staged app.js`).
 
-\---
+---
 
-**### پرسش ۵: مفاهیم Stage / Index و Stash در گیت چه هستند و چه کاربردی دارند؟**
+### پرسش ۵: مفاهیم Stage / Index و Stash در گیت چه هستند و چه کاربردی دارند؟
 
-**#### ۱. Stage / Index (منطقه آماده‌سازی):**
-Stage یا Index لایه واسطی میان دایرکتوری کاری (Working Directory) و مخزن گیت (Repository) است. وقتی فایلی را با \`git add\` استیج می‌کنید، در واقع پیش‌نویسی از تغییرات را آماده می‌سازید که قرار است در کامیت بعدی ثبت شوند.
-\- **\*\*کاربرد:\*\*** به برنامه‌نویس اجازه می‌دهد تنها بخشی از فایل‌های تغییریافته را برای یک کامیت اتمیک مشخص انتخاب کند، نه تمام فایل‌های دست‌خورده در پوشه پروژه.
+#### ۱. Stage / Index (منطقه آماده‌سازی):
+Stage یا Index لایه واسطی میان دایرکتوری کاری (Working Directory) و مخزن گیت (Repository) است. وقتی فایلی را با `git add` استیج می‌کنید، در واقع پیش‌نویسی از تغییرات را آماده می‌سازید که قرار است در کامیت بعدی ثبت شوند.
+- **کاربرد:** به برنامه‌نویس اجازه می‌دهد تنها بخشی از فایل‌های تغییریافته را برای یک کامیت اتمیک مشخص انتخاب کند، نه تمام فایل‌های دست‌خورده در پوشه پروژه.
 
-**#### ۲. Git Stash (انباره موقت):**
-دستور \`git stash\` وضعیت فعلی فایل‌های ویرایش‌شده و استیج‌شده را در یک حافظه پشته‌ای موقت ذخیره کرده و Working Directory را به آخرین کامیت پاک بازمی‌گرداند.
-\- **\*\*کاربرد:\*\*** هنگامی که وسط انجام یک کار ناتمام هستید و هنوز کد آماده کامیت نیست، ولی باید فوراً به شاخه دیگری بروید (مثلاً برای بررسی یک باگ اضطراری)، از \`git stash\` استفاده می‌کنید. پس از بازگشت، با دستور \`git stash pop\` تغییرات را دوباره برمی‌گردانید.
+#### ۲. Git Stash (انباره موقت):
+دستور `git stash` وضعیت فعلی فایل‌های ویرایش‌شده و استیج‌شده را در یک حافظه پشته‌ای موقت ذخیره کرده و Working Directory را به آخرین کامیت پاک بازمی‌گرداند.
+- **کاربرد:** هنگامی که وسط انجام یک کار ناتمام هستید و هنوز کد آماده کامیت نیست، ولی باید فوراً به شاخه دیگری بروید (مثلاً برای بررسی یک باگ اضطراری)، از `git stash` استفاده می‌کنید. پس از بازگشت، با دستور `git stash pop` تغییرات را دوباره برمی‌گردانید.
 
-\---
+---
 
-**### پرسش ۶: مفهوم Snapshot در گیت چیست و چگونه با Commit ارتباط دارد؟**
+### پرسش ۶: مفهوم Snapshot در گیت چیست و چگونه با Commit ارتباط دارد؟
 
-**\*\*پاسخ:\*\***  
-برخلاف سیستم‌های سنتی کنترل نسخه (VCS) مانند SVN که تغییرات را به صورت «فهرستی از تفاوت‌های دلتا نسبت به فایل اولیه» (Delta-based) ذخیره می‌کردند، **\*\*گیت به صورت اسنپ‌شات (Snapshot) فکر و عمل می‌کند\*\***.
+**پاسخ:**
+برخلاف سیستم‌های سنتی کنترل نسخه (VCS) مانند SVN که تغییرات را به صورت «فهرستی از تفاوت‌های دلتا نسبت به فایل اولیه» (Delta-based) ذخیره می‌کردند، **گیت به صورت اسنپ‌شات (Snapshot) فکر و عمل می‌کند**.
 
-یک **\*\*Snapshot\*\*** در گیت، نمای کامل وضعیت کل فایل‌های پروژه در یک لحظه مشخص از زمان است. هنگامی که یک کامیت ثبت می‌شود:
-1\. گیت عکسی (Snapshot) از ساختار تمام فایل‌ها در همان لحظه می‌گیرد.
-2\. برای فایل‌هایی که تغییر کرده‌اند، شیء جدید \`blob\` ذخیره می‌شود.
-3\. برای فایل‌هایی که تغییری نکرده‌اند، گیت مجدداً آن‌ها را ذخیره نمی‌کند، بلکه تنها یک پیوند (Link / Pointer) به شیء موجود قبلی ثبت می‌نماید تا حجم مخزن بهینه بماند.
-4\. هر شیء **\*\*Commit\*\*** شامل متادیتای نویسنده، تاریخ، پیام، ارجاع به کامیت‌های والد (Parents) و اشاره‌گری به شیء \`tree\` ریشه اسنپ‌شات آن لحظه است.
+یک **Snapshot** در گیت، نمای کامل وضعیت کل فایل‌های پروژه در یک لحظه مشخص از زمان است. هنگامی که یک کامیت ثبت می‌شود:
+1. گیت عکسی (Snapshot) از ساختار تمام فایل‌ها در همان لحظه می‌گیرد.
+2. برای فایل‌هایی که تغییر کرده‌اند، شیء جدید `blob` ذخیره می‌شود.
+3. برای فایل‌هایی که تغییری نکرده‌اند، گیت مجدداً آن‌ها را ذخیره نمی‌کند، بلکه تنها یک پیوند (Link / Pointer) به شیء موجود قبلی ثبت می‌نماید تا حجم مخزن بهینه بماند.
+4. هر شیء **Commit** شامل متادیتای نویسنده، تاریخ، پیام، ارجاع به کامیت‌های والد (Parents) و اشاره‌گری به شیء `tree` ریشه اسنپ‌شات آن لحظه است.
 
-\---
+---
 
-**### پرسش ۷: تفاوت Local Repository با Remote Repository چیست و چه فرآیندهایی ارتباط آن‌ها را مدیریت می‌کنند؟**
+### پرسش ۷: تفاوت Local Repository با Remote Repository چیست و چه فرآیندهایی ارتباط آن‌ها را مدیریت می‌کنند؟
 
-\| ویژگی | مخزن محلی (Local Repository) | مخزن ریموت (Remote Repository) |
-\|:---|:---|:---|
-\| **\*\*محل فیزیکی\*\*** | روی حافظه سیستم کامپیوتر توسعه‌دهنده (پوشه \`.git\`) | روی سرورهای ابری یا مرکزی (مانند GitHub, GitLab) |
-\| **\*\*وابستگی به اینترنت\*\*** | کاملاً آفلاین؛ ساخت کامیت، برنچ و لاگ نیاز به شبکه ندارد. | نیازمند اتصال به اینترنت برای انتقال داده‌ها. |
-\| **\*\*دسترسی تیمی\*\*** | فقط برای شخص برنامه‌نویس در دسترس است. | مخزن اشتراکی برای هماهنگی و همگام‌سازی اعضای تیم. |
+| ویژگی | مخزن محلی (Local Repository) | مخزن ریموت (Remote Repository) |
+|:---|:---|:---|
+| **محل فیزیکی** | روی حافظه سیستم کامپیوتر توسعه‌دهنده (پوشه `.git`) | روی سرورهای ابری یا مرکزی (مانند GitHub, GitLab) |
+| **وابستگی به اینترنت** | کاملاً آفلاین؛ ساخت کامیت، برنچ و لاگ نیاز به شبکه ندارد. | نیازمند اتصال به اینترنت برای انتقال داده‌ها. |
+| **دسترسی تیمی** | فقط برای شخص برنامه‌نویس در دسترس است. | مخزن اشتراکی برای هماهنگی و همگام‌سازی اعضای تیم. |
 
-**#### فرآیندهای ارتباطی میان دو مخزن:**
-\- **\*\*\`git push\`:\*\*** کامیت‌های ثبت‌شده در مخزن محلی را به شاخه متناظر در مخزن ریموت ارسال می‌کند.
-\- **\*\*\`git fetch\`:\*\*** تغییرات و کامیت‌های جدید ریموت را دریافت کرده و در شاخه‌های ردیابی (\`origin/branch\`) قرار می‌دهد بدون تغییر در کدهای محلی.
-\- **\*\*\`git pull\`:\*\*** تغییرات ریموت را دریافت کرده و مستقیماً با شاخه جاری ادغام می‌کند (\`fetch + merge\`).
-\- **\*\*\`git clone\`:\*\*** یک نسخه کامل از مخزن ریموت شامل تمامی تاریخچه و شاخه‌ها را دانلود و روی سیستم محلی پیکربندی می‌کند.
+#### فرآیندهای ارتباطی میان دو مخزن:
+- **`git push`:** کامیت‌های ثبت‌شده در مخزن محلی را به شاخه متناظر در مخزن ریموت ارسال می‌کند.
+- **`git fetch`:** تغییرات و کامیت‌های جدید ریموت را دریافت کرده و در شاخه‌های ردیابی (`origin/branch`) قرار می‌دهد بدون تغییر در کدهای محلی.
+- **`git pull`:** تغییرات ریموت را دریافت کرده و مستقیماً با شاخه جاری ادغام می‌کند (`fetch + merge`).
+- **`git clone`:** یک نسخه کامل از مخزن ریموت شامل تمامی تاریخچه و شاخه‌ها را دانلود و روی سیستم محلی پیکربندی می‌کند.
 
-\---
+---
 
-**# 13. لینک‌های مهم پروژه**
+# 13. لینک‌های مهم پروژه
 
-\- **\*\*مخزن سورس کد در GitHub:\*\***  
-  [https\://github.com/Hosein1011/anteiku]\(https\://github.com/Hosein1011/anteiku)
+- **مخزن سورس کد در GitHub:**
+  [https://github.com/Hosein1011/anteiku](https://github.com/Hosein1011/anteiku)
 
-\- **\*\*آدرس وب‌سایت زنده (GitHub Pages):\*\***  
-  [https\://hosein1011.github.io/anteiku/]\(https\://hosein1011.github.io/anteiku/)
+- **آدرس وب‌سایت زنده (GitHub Pages):**
+  [https://hosein1011.github.io/anteiku/](https://hosein1011.github.io/anteiku/)
 
-\- **\*\*پایپ‌لاین‌های استقرار (GitHub Actions):\*\***  
-  [https\://github.com/Hosein1011/anteiku/actions]\(https\://github.com/Hosein1011/anteiku/actions)
+- **پایپ‌لاین‌های استقرار (GitHub Actions):**
+  [https://github.com/Hosein1011/anteiku/actions](https://github.com/Hosein1011/anteiku/actions)
 
-\- **\*\*لیست Pull Requestهای ادغام‌شده:\*\***  
-  [https\://github.com/Hosein1011/anteiku/pulls]\(https\://github.com/Hosein1011/anteiku/pulls)
+- **لیست Pull Requestهای ادغام‌شده:**
+  [https://github.com/Hosein1011/anteiku/pulls](https://github.com/Hosein1011/anteiku/pulls)
 
-  [https\://github.com/Hosein1011/anteiku/projects]\(https\://github.com/Hosein1011/anteiku/projects)
+  [https://github.com/Hosein1011/anteiku/projects](https://github.com/Hosein1011/anteiku/projects)
 
-\---
+---
 
-**# 14. نحوه استفاده از هوش مصنوعی**
+# 14. نحوه استفاده از هوش مصنوعی
 
-استفاده ای که بنده از هوش مصنوعی داشتم به صورت زیر هست 
+**استفاده ای که بنده از هوش مصنوعی داشتم به صورت زیر هست**
 من از chatgpt نسخه رایگان برای گرفتن ایده طراحی سایت و بالا اوردن یک پروژه خام ری اکت استفاده کردم و در مورد معماری پروژه تم پروژه کمک گرفتم چت ها به صورت کامل در لینک های زیر هستند
 
-همچنین برای حل کردن مشکلاتی که در دیپلوی کردن داشتم هم کمک گرفتم 
-https\://chatgpt.com/share/6a819d8c-eee0-83ed-a104-d33db5af88e3
-https\://chatgpt.com/c/6a80cf2a-2fd4-83eb-9412-6c261aed5f4c
-https\://chatgpt.com/share/6a819f85-f300-83ed-bce0-eb1747953652
+**همچنین برای حل کردن مشکلاتی که در دیپلوی کردن داشتم هم کمک گرفتم**
+https://chatgpt.com/share/6a819d8c-eee0-83ed-a104-d33db5af88e3
+https://chatgpt.com/c/6a80cf2a-2fd4-83eb-9412-6c261aed5f4c
+https://chatgpt.com/share/6a819f85-f300-83ed-bce0-eb1747953652
 
-از qwen 3.8 برای گرفتن فرمت و کلیات گزارش کار که درحال مشاهده اون هستید بر اساس مخزن داده شده استفادهکردم سپس گزارش رو قسمت هایی که باید توسط خودم کامل میشد رو کامل کردم و در نهایت با استفاده از antigravity ide بررسی کردم که مشکلی توی گزارش وجود نداشته باشه 
-https\://chat.qwen.ai/s/a7db1903-1cf7-4213-a4fa-604949e7d733?fev=0.2.86
+**از qwen 3.8 برای گرفتن فرمت و کلیات گزارش کار که درحال مشاهده اون هستید بر اساس مخزن داده شده استفادهکردم سپس گزارش رو قسمت هایی که باید توسط خودم کامل میشد رو کامل کردم و در نهایت با استفاده از antigravity ide بررسی کردم که مشکلی توی گزارش وجود نداشته باشه**
+https://chat.qwen.ai/s/a7db1903-1cf7-4213-a4fa-604949e7d733?fev=0.2.86
 
-در ادامه باید بگم میخواستم با استفاده از coder Qwen مقداری پروژه رو تغییر بدم ولی بعد از اینکه دیدم مقداری مشکل داره در فهم خواسته هام ازش استفاده نکردم برای این کار 
-
+**در ادامه باید بگم میخواستم با استفاده از coder Qwen مقداری پروژه رو تغییر بدم ولی بعد از اینکه دیدم مقداری مشکل داره در فهم خواسته هام ازش استفاده نکردم برای این کار**
